@@ -1,3 +1,7 @@
 export default function Logo() {
-  return <p>Logo</p>;
+  return (
+    <div className="logo">
+      <span>🎬</span>FilmDiary
+    </div>
+  );
 }

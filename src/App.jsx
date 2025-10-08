@@ -10,7 +10,7 @@ import SearchResults from "./components/SearchResults";
 const KEY = "40bcec08";
 
 export default function App() {
-  const [query, setQuery] = useState("armageddon");
+  const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export default function App() {
     <>
       <Header>
         <Logo />
-        <Search />
+        <Search query={query} setQuery={setQuery} />
       </Header>
       <Main>
         <Navigation />
