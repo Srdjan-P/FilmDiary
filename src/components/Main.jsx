@@ -1,3 +1,3 @@
 export default function Main({ children }) {
-  return <>{children}</>;
+  return <main>{children}</main>;
 }
