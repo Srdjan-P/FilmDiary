@@ -34,7 +34,7 @@ export default function App() {
       <Main>
         <Navigation />
         <SearchResults />
-        <MovieList />
+        <MovieList movies={movies} />
       </Main>
     </>
   );

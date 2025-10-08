@@ -1,3 +1,11 @@
-export default function MovieList() {
-  return <p>Movie List</p>;
+import Movie from "./Movie";
+
+export default function MovieList({ movies }) {
+  return (
+    <ul className="movie-list">
+      {movies.map((movie) => (
+        <Movie movie={movie} key={movie.imdbID} />
+      ))}
+    </ul>
+  );
 }
