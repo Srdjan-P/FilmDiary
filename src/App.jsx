@@ -7,6 +7,7 @@ import Navigation from "./components/Navigation";
 import Search from "./components/Search";
 import SearchResults from "./components/SearchResults";
 import Loader from "./components/Loader";
+import MovieCard from "./components/MovieCard";
 
 const KEY = "40bcec08";
 
@@ -35,13 +36,19 @@ const initialMovies = [
 export default function App() {
   const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
-  const [selectedId, setSelectedId] = useState(null);
+  const [selectedMovie, setSelectedMovie] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [results, setResults] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  function handleSelectMovie(id) {
-    setSelectedId((selectedId) => (selectedId === id ? null : id));
+  function handleSelectMovie(movie) {
+    setSelectedMovie(movie);
+    setIsOpen(true);
+  }
+
+  function handleCloseMovie() {
+    setSelectedMovie(null);
+    setIsOpen(false);
   }
 
   useEffect(() => {
@@ -97,6 +104,9 @@ export default function App() {
           <MovieList movies={movies} onSelectMovie={handleSelectMovie} />
         )}
       </Main>
+      {isOpen && selectedMovie && (
+        <MovieCard movie={selectedMovie} onClose={handleCloseMovie} KEY={KEY} />
+      )}
     </>
   );
 }
