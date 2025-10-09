@@ -59,8 +59,8 @@ body {
 
     .movie-list {
       display: flex;
-      gap: 1.5rem;
       flex-wrap: wrap;
+      gap: 0.5rem;
       max-width: 79.5rem;
 
       .movie {
