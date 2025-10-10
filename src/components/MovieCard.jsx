@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Button from "./Button";
 
 export default function MovieCard({ selectedMovie, KEY, onClose }) {
   const [movieDetails, setMovieDetails] = useState(null);
@@ -70,6 +71,7 @@ export default function MovieCard({ selectedMovie, KEY, onClose }) {
               <span className="data">{movieDetails?.Actors}</span>
             </div>
           </div>
+          <Button>Add to Watch List</Button>
         </div>
       </div>
     </div>
