@@ -6,8 +6,10 @@ import MovieList from "./components/MovieList";
 import Navigation from "./components/Navigation";
 import Search from "./components/Search";
 import SearchResults from "./components/SearchResults";
-import Loader from "./components/Loader";
 import MovieCard from "./components/MovieCard";
+import { Routes, Route, NavLink, useLocation } from "react-router";
+import WatchList from "./components/WatchList";
+import WatchedList from "./components/WatchedList";
 
 const KEY = "40bcec08";
 
@@ -19,8 +21,8 @@ const initialMovies = [
   "resident alien",
   "supernatural",
   "lucifer",
-  "braveheart",
-  "swordfish",
+  "lethal weapon",
+  "jurassic world",
   "armageddon",
   "inception",
   "die hard",
@@ -40,6 +42,7 @@ export default function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [results, setResults] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const location = useLocation();
 
   function handleSelectMovie(movie) {
     setSelectedMovie(movie);
@@ -52,60 +55,106 @@ export default function App() {
   }
 
   useEffect(() => {
-    async function fetchInitialMovies() {
-      setIsLoading(true);
-      try {
-        let allMovies = [];
+    if (location.pathname === "/" && !query) {
+      async function fetchInitialMovies() {
+        setIsLoading(true);
+        try {
+          let allMovies = [];
 
-        for (const term of initialMovies) {
-          const url = `http://www.omdbapi.com/?apikey=${KEY}&s=${term}`;
-          const res = await fetch(url);
-          const data = await res.json();
+          for (const term of initialMovies) {
+            const url = `http://www.omdbapi.com/?apikey=${KEY}&s=${term}`;
+            const res = await fetch(url);
+            const data = await res.json();
 
-          if (data.Search) {
-            allMovies = [...allMovies, ...data.Search.slice(0, 1)];
+            if (data.Search) {
+              allMovies = [...allMovies, ...data.Search.slice(0, 1)];
+            }
           }
+          const shuffled = allMovies.sort(() => 0.5 - Math.random());
+          setMovies(shuffled);
+        } catch (error) {
+          console.error("Error", error);
+        } finally {
+          setIsLoading(false);
         }
-        const shuffled = allMovies.sort(() => 0.5 - Math.random());
-        setMovies(shuffled);
+      }
+
+      fetchInitialMovies();
+    }
+  }, [location.pathname, query]);
+
+  useEffect(() => {
+    if (!query.trim()) {
+      if (location.pathname === "/") {
+        return;
+      }
+      setMovies([]);
+      return;
+    }
+
+    const timer = setTimeout(async function fetchMovies() {
+      setIsLoading(true);
+
+      try {
+        const url = `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`;
+        const res = await fetch(url);
+        const data = await res.json();
+
+        if (data.Response === "True") {
+          setMovies(data.Search);
+          setResults(data.totalResults);
+        } else {
+          setMovies([]);
+          setResults(0);
+        }
       } catch (error) {
-        console.error("Error", error);
+        console.error("Error fetching movies", error);
+        setMovies([]);
       } finally {
         setIsLoading(false);
       }
-    }
-    fetchInitialMovies();
-  }, []);
+    }, 500);
 
-  useEffect(() => {
-    const url = `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`;
-
-    async function fetchMovies() {
-      const res = await fetch(url);
-      const data = await res.json();
-      setMovies(data.Search);
-      setResults(data.totalResults);
-    }
-    fetchMovies();
-  }, [query]);
+    return () => clearTimeout(timer);
+  }, [query, location.pathname]);
 
   return (
     <>
       <Header>
-        <Logo />
+        <NavLink to="/" onClick={() => setQuery("")}>
+          <Logo />
+        </NavLink>
         <Search query={query} setQuery={setQuery} />
       </Header>
       <Main>
-        <Navigation />
+        <Navigation>
+          <NavLink to="/">Search Movies</NavLink>
+          <NavLink to="/watch">Watch List</NavLink>
+          <NavLink to="/watched">Watched List</NavLink>
+        </Navigation>
         <SearchResults />
-        {isLoading ? (
-          <Loader />
-        ) : (
-          <MovieList movies={movies} onSelectMovie={handleSelectMovie} />
-        )}
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <MovieList
+                movies={movies}
+                onSelectMovie={handleSelectMovie}
+                isLoading={isLoading}
+              />
+            }
+          />
+          <Route path="/watch" element={<WatchList />} />
+          <Route path="/watched" element={<WatchedList />} />
+        </Routes>
       </Main>
+
       {isOpen && selectedMovie && (
-        <MovieCard movie={selectedMovie} onClose={handleCloseMovie} KEY={KEY} />
+        <MovieCard
+          selectedMovie={selectedMovie}
+          onClose={handleCloseMovie}
+          KEY={KEY}
+        />
       )}
     </>
   );

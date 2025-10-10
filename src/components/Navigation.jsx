@@ -1,3 +1,3 @@
-export default function Navigation() {
-  return <nav>Navigation</nav>;
+export default function Navigation({ children }) {
+  return <nav>{children}</nav>;
 }

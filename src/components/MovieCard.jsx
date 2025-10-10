@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 
-export default function MovieCard({ movie, KEY, onClose }) {
+export default function MovieCard({ selectedMovie, KEY, onClose }) {
   const [movieDetails, setMovieDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     async function fetchMovieDetails() {
-      if (!movie?.imdbID) return;
+      if (!selectedMovie?.imdbID) return;
       setIsLoading(true);
 
       try {
-        const url = `http://www.omdbapi.com/?apikey=${KEY}&i=${movie.imdbID}`;
+        const url = `http://www.omdbapi.com/?apikey=${KEY}&i=${selectedMovie.imdbID}`;
         const res = await fetch(url);
         const data = await res.json();
 
@@ -23,7 +23,7 @@ export default function MovieCard({ movie, KEY, onClose }) {
       }
     }
     fetchMovieDetails();
-  }, [movie?.imdbID, KEY]);
+  }, [selectedMovie?.imdbID, KEY]);
 
   console.log(movieDetails);
 
