@@ -6,7 +6,7 @@ export default class Loader extends React.Component {
     return (
       <div className="loader-container">
         <FadeLoader
-          color="#ff0000"
+          color="rgb(67, 97, 238)"
           height={25}
           width={8}
           radius={10}

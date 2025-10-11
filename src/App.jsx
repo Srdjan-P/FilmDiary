@@ -41,6 +41,7 @@ export default function App() {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [results, setResults] = useState("");
+  const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
 
@@ -52,6 +53,10 @@ export default function App() {
   function handleCloseMovie() {
     setSelectedMovie(null);
     setIsOpen(false);
+  }
+
+  function handleAddWatchedMovie(movie) {
+    setWatched((watched) => [...watched, movie]);
   }
 
   useEffect(() => {
@@ -118,6 +123,8 @@ export default function App() {
     return () => clearTimeout(timer);
   }, [query, location.pathname]);
 
+  console.log("watched", watched);
+
   return (
     <>
       <Header>
@@ -145,7 +152,7 @@ export default function App() {
             }
           />
           <Route path="/watch" element={<WatchList />} />
-          <Route path="/watched" element={<WatchedList />} />
+          <Route path="/watched" element={<WatchedList watched={watched} />} />
         </Routes>
       </Main>
 
@@ -153,6 +160,7 @@ export default function App() {
         <MovieCard
           selectedMovie={selectedMovie}
           onClose={handleCloseMovie}
+          onWatchedMovie={handleAddWatchedMovie}
           KEY={KEY}
         />
       )}

@@ -1,9 +1,18 @@
 import { useEffect, useState } from "react";
 import Button from "./Button";
+import Loader from "./Loader";
 
-export default function MovieCard({ selectedMovie, KEY, onClose }) {
+export default function MovieCard({
+  selectedMovie,
+  KEY,
+  onClose,
+  onWatchedMovie,
+}) {
   const [movieDetails, setMovieDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [userRating, setUserRating] = useState(null);
+  const [comment, setComment] = useState("");
+  const [watchedBox, setWatchedBox] = useState(false);
 
   useEffect(() => {
     async function fetchMovieDetails() {
@@ -26,54 +35,86 @@ export default function MovieCard({ selectedMovie, KEY, onClose }) {
     fetchMovieDetails();
   }, [selectedMovie?.imdbID, KEY]);
 
-  console.log(movieDetails);
+  function handleAddToWatched() {
+    if (!movieDetails) {
+      console.error("No movie details available");
+      return;
+    }
+
+    const watchedMovie = {
+      imdbID: movieDetails.imdbID,
+      title: movieDetails.Title,
+      year: movieDetails.Year,
+      poster: movieDetails.Poster,
+      imdbRating: movieDetails.imdbRating,
+      runtime: movieDetails.Runtime,
+      userRating: userRating,
+      comment: comment,
+      addedAt: new Date().toISOString(),
+    };
+    console.log("Addid to watced:", watchedMovie);
+    onWatchedMovie(watchedMovie);
+    onClose();
+  }
 
   return (
     <div className="movie-card-wrapper">
-      <div className="movie-card">
-        <div className="movie-poster">
-          <img src={movieDetails?.Poster} alt="" />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className="movie-card">
+          <div className="movie-poster">
+            <img src={movieDetails?.Poster} alt="" />
+          </div>
+          <div className="movie-details">
+            <div className="movie-details-header">
+              <div className="movie-title">{movieDetails?.Title}</div>
+              <span className="close" onClick={onClose}>
+                ❌
+              </span>
+            </div>
+            <div className="stats">
+              <span className="rating">
+                <span>⭐</span>
+                {movieDetails?.imdbRating}
+              </span>{" "}
+              <span>{movieDetails?.Runtime}</span>
+            </div>
+            <div className="description">{movieDetails?.Plot}</div>
+            <div className="elements">
+              <div className="row">
+                <span className="type">Country:</span>
+                <span className="data">{movieDetails?.Country}</span>
+              </div>
+              <div className="row">
+                <span className="type">Genre:</span>
+                <span className="data">{movieDetails?.Genre}</span>
+              </div>
+              <div className="row">
+                <span className="type">Released:</span>
+                <span className="data">{movieDetails?.Released}</span>
+              </div>
+              <div className="row">
+                <span className="type">Director:</span>
+                <span className="data">{movieDetails?.Director}</span>
+              </div>
+              <div className="row">
+                <span className="type">Casts:</span>
+                <span className="data">{movieDetails?.Actors}</span>
+              </div>
+            </div>
+            <div className="buttons">
+              <Button>
+                <span>+ </span> Watch List
+              </Button>
+              <Button onClick={handleAddToWatched}>
+                <span>+ </span>
+                Watched List
+              </Button>
+            </div>
+          </div>
         </div>
-        <div className="movie-details">
-          <div className="movie-details-header">
-            <div className="movie-title">{movieDetails?.Title}</div>
-            <span className="close" onClick={onClose}>
-              ❌
-            </span>
-          </div>
-          <div className="stats">
-            <span className="rating">
-              <span>⭐</span>
-              {movieDetails?.imdbRating}
-            </span>{" "}
-            <span>{movieDetails?.Runtime}</span>
-          </div>
-          <div className="description">{movieDetails?.Plot}</div>
-          <div className="elements">
-            <div className="row">
-              <span className="type">Country:</span>
-              <span className="data">{movieDetails?.Country}</span>
-            </div>
-            <div className="row">
-              <span className="type">Genre:</span>
-              <span className="data">{movieDetails?.Genre}</span>
-            </div>
-            <div className="row">
-              <span className="type">Released:</span>
-              <span className="data">{movieDetails?.Released}</span>
-            </div>
-            <div className="row">
-              <span className="type">Director:</span>
-              <span className="data">{movieDetails?.Director}</span>
-            </div>
-            <div className="row">
-              <span className="type">Casts:</span>
-              <span className="data">{movieDetails?.Actors}</span>
-            </div>
-          </div>
-          <Button>Add to Watch List</Button>
-        </div>
-      </div>
+      )}
     </div>
   );
 }
