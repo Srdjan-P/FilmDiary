@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Button from "./Button";
 import Loader from "./Loader";
+import Feedback from "./Feedback";
 
 export default function MovieCard({
   selectedMovie,
@@ -81,37 +82,43 @@ export default function MovieCard({
               <span>{movieDetails?.Runtime}</span>
             </div>
             <div className="description">{movieDetails?.Plot}</div>
-            <div className="elements">
-              <div className="row">
-                <span className="type">Country:</span>
-                <span className="data">{movieDetails?.Country}</span>
-              </div>
-              <div className="row">
-                <span className="type">Genre:</span>
-                <span className="data">{movieDetails?.Genre}</span>
-              </div>
-              <div className="row">
-                <span className="type">Released:</span>
-                <span className="data">{movieDetails?.Released}</span>
-              </div>
-              <div className="row">
-                <span className="type">Director:</span>
-                <span className="data">{movieDetails?.Director}</span>
-              </div>
-              <div className="row">
-                <span className="type">Casts:</span>
-                <span className="data">{movieDetails?.Actors}</span>
-              </div>
-            </div>
-            <div className="buttons">
-              <Button>
-                <span>+ </span> Watch List
-              </Button>
-              <Button onClick={handleAddToWatched}>
-                <span>+ </span>
-                Watched List
-              </Button>
-            </div>
+            {watchedBox ? (
+              <Feedback onAddToWatched={handleAddToWatched} />
+            ) : (
+              <>
+                <div className="elements">
+                  <div className="row">
+                    <span className="type">Country:</span>
+                    <span className="data">{movieDetails?.Country}</span>
+                  </div>
+                  <div className="row">
+                    <span className="type">Genre:</span>
+                    <span className="data">{movieDetails?.Genre}</span>
+                  </div>
+                  <div className="row">
+                    <span className="type">Released:</span>
+                    <span className="data">{movieDetails?.Released}</span>
+                  </div>
+                  <div className="row">
+                    <span className="type">Director:</span>
+                    <span className="data">{movieDetails?.Director}</span>
+                  </div>
+                  <div className="row">
+                    <span className="type">Casts:</span>
+                    <span className="data">{movieDetails?.Actors}</span>
+                  </div>
+                </div>
+                <div className="buttons">
+                  <Button>
+                    <span>+ </span> Watch List
+                  </Button>
+                  <Button onClick={() => setWatchedBox(true)}>
+                    <span>+ </span>
+                    Watched List
+                  </Button>
+                </div>
+              </>
+            )}
           </div>
         </div>
       )}

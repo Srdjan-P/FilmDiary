@@ -41,12 +41,12 @@ $darkestColor: color.adjust($primaryColor, $lightness: -55%);
 body {
   font-family: Arial, Helvetica, sans-serif;
   height: 100%;
-  width: 100vw;
+  width: 100%;
   background-color: $darkestColor;
   color: #fff;
 
   header {
-    width: 100vw;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     padding: 2rem;
@@ -69,7 +69,8 @@ body {
     }
 
     .search {
-      width: 30vw;
+      width: 30%;
+      min-width: 15rem;
 
       input[type="text"] {
         width: 100%;
@@ -87,6 +88,10 @@ body {
           background-color: #ffffffd8;
           opacity: 1;
           color: rgba(0, 0, 0, 0.839);
+
+          &::placeholder {
+            color: gray;
+          }
         }
 
         &:disabled {
@@ -99,7 +104,7 @@ body {
         }
 
         &::placeholder {
-          color: #fff;
+          color: #ffffffab;
           font-size: 1rem;
         }
       }
@@ -110,13 +115,12 @@ body {
     display: flex;
     width: 100%;
     justify-content: center;
+    padding: 2rem;
 
     .main-container {
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
-      padding: 2rem;
       gap: 2rem;
       position: relative;
       max-width: 76rem;
@@ -167,7 +171,7 @@ body {
 
         .movie {
           height: 17rem;
-          width: 11.6rem;
+          width: 12rem;
           overflow: hidden;
           position: relative;
           border-radius: 0.7rem;
@@ -193,7 +197,7 @@ body {
           }
         }
       }
-      .watched-movie {
+      .watched-list {
         display: flex;
         flex-wrap: wrap;
         max-width: 75rem;
@@ -201,21 +205,33 @@ body {
 
         ul {
           display: flex;
-          justify-content: space-between;
           gap: 1rem;
           flex-wrap: wrap;
 
           li {
             display: flex;
-            width: 24.3rem;
+            flex-direction: column;
+            width: 18rem;
             border: 3px solid black;
             background-color: red;
+
+            .movie-poster {
+              width: 100%;
+              height: 15rem;
+              background-color: purple;
+              overflow: hidden;
+
+              img {
+                width: 100%;
+              }
+            }
 
             .details {
               padding: 1rem;
               display: flex;
               justify-content: space-between;
               width: 100%;
+              height: 10rem;
 
               .header {
                 display: flex;
@@ -257,11 +273,12 @@ body {
       border: 2px solid #ffffff5d;
 
       .movie-details {
-        padding: 3%;
+        width: 100%;
+        padding: 1.5rem;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
         overflow: auto;
+        position: relative;
 
         .movie-details-header {
           display: flex;
@@ -319,6 +336,9 @@ body {
         .buttons {
           display: flex;
           justify-content: space-between;
+          position: absolute;
+          bottom: 1.5rem;
+          width: 90%;
         }
       }
 
@@ -326,6 +346,60 @@ body {
         height: 100%;
         border-radius: 0.5rem 0 0 0.5rem;
         box-shadow: 15px 0 15px -10px black;
+      }
+
+      .feedback {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 1.5rem;
+
+        .your-rating {
+          p {
+            margin-bottom: 0.7rem;
+            font-size: 1.4rem;
+            font-weight: 600;
+          }
+
+          span {
+            font-size: 1.5rem;
+          }
+        }
+
+        .your-comment {
+          display: flex;
+          flex-direction: column;
+
+          p {
+            padding-bottom: 0.7rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+          }
+
+          textarea {
+            height: 4rem;
+            max-height: 4rem;
+            min-height: 4rem;
+            max-width: 100%;
+            min-width: 100%;
+            font-size: 1.1rem;
+            padding: 0.5rem;
+            background-color: rgba(250, 247, 247, 0.173);
+            color: #fff;
+
+            &::placeholder {
+              color: #ffffff69;
+            }
+          }
+        }
+        .float-right {
+          .btn {
+            float: right !important;
+            font-size: 1rem;
+            padding: 0.4rem 2rem;
+          }
+        }
       }
     }
   }

@@ -2,7 +2,9 @@ export default function WatchedMovie({ movie }) {
   return (
     <>
       <li>
-        <img src={movie.poster} alt="" />
+        <div className="movie-poster">
+          <img src={movie.poster} alt="" />
+        </div>
         <div className="details">
           <div className="header">
             <span className="title">{movie.title}</span>
