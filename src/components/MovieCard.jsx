@@ -8,11 +8,13 @@ export default function MovieCard({
   KEY,
   onClose,
   onWatchedMovie,
+  userRating,
+  setUserRating,
+  comment,
+  setComment,
 }) {
   const [movieDetails, setMovieDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [userRating, setUserRating] = useState(null);
-  const [comment, setComment] = useState("");
   const [watchedBox, setWatchedBox] = useState(false);
 
   useEffect(() => {
@@ -49,8 +51,8 @@ export default function MovieCard({
       poster: movieDetails.Poster,
       imdbRating: movieDetails.imdbRating,
       runtime: movieDetails.Runtime,
-      userRating: userRating,
-      comment: comment,
+      userRating,
+      comment,
       addedAt: new Date().toISOString(),
     };
     console.log("Addid to watced:", watchedMovie);
@@ -83,7 +85,13 @@ export default function MovieCard({
             </div>
             <div className="description">{movieDetails?.Plot}</div>
             {watchedBox ? (
-              <Feedback onAddToWatched={handleAddToWatched} />
+              <Feedback
+                onAddToWatched={handleAddToWatched}
+                setUserRating={setUserRating}
+                setComment={setComment}
+                comment={comment}
+                userRating={userRating}
+              />
             ) : (
               <>
                 <div className="elements">

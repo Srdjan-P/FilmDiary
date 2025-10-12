@@ -44,6 +44,8 @@ export default function App() {
   const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
+  const [userRating, setUserRating] = useState(null);
+  const [comment, setComment] = useState("");
 
   function handleSelectMovie(movie) {
     setSelectedMovie(movie);
@@ -53,10 +55,13 @@ export default function App() {
   function handleCloseMovie() {
     setSelectedMovie(null);
     setIsOpen(false);
+    setComment("");
+    setUserRating(0);
   }
 
   function handleAddWatchedMovie(movie) {
     setWatched((watched) => [...watched, movie]);
+    setUserRating(0);
   }
 
   useEffect(() => {
@@ -124,6 +129,7 @@ export default function App() {
   }, [query, location.pathname]);
 
   console.log("watched", watched);
+  console.log("userRating", userRating);
 
   return (
     <>
@@ -170,6 +176,10 @@ export default function App() {
           onClose={handleCloseMovie}
           onWatchedMovie={handleAddWatchedMovie}
           KEY={KEY}
+          userRating={userRating}
+          setUserRating={setUserRating}
+          comment={comment}
+          setComment={setComment}
         />
       )}
     </>

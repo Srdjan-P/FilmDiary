@@ -201,7 +201,7 @@ body {
         display: flex;
         flex-wrap: wrap;
         max-width: 75rem;
-        justify-content: center;
+        width: 100%;
 
         ul {
           display: flex;
@@ -212,13 +212,12 @@ body {
             display: flex;
             flex-direction: column;
             width: 18rem;
-            border: 3px solid black;
-            background-color: red;
+            background-color: rgba(56, 56, 56, 0.301);
+            box-shadow: 0 0 4px 0.5px $primaryColor;
 
             .movie-poster {
               width: 100%;
               height: 15rem;
-              background-color: purple;
               overflow: hidden;
 
               img {
@@ -227,9 +226,9 @@ body {
             }
 
             .details {
-              padding: 1rem;
               display: flex;
-              justify-content: space-between;
+              flex-direction: column;
+              gap: 1rem;
               width: 100%;
               height: 10rem;
 
@@ -237,10 +236,26 @@ body {
                 display: flex;
                 justify-content: space-between;
                 width: 100%;
+                align-items: center;
+                background-color: $darkestColor;
+                padding: 0.5rem 1rem;
+                box-shadow: 0 0 10px 1px $darkColor;
+
+                .star {
+                  font-size: 1.2rem;
+                }
+
+                .title {
+                  font-size: 1.5rem;
+                }
               }
 
-              .title {
-                font-size: 1.5rem;
+              .comment {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                overflow: auto;
+                padding: 0.5rem 1rem;
               }
             }
 
@@ -352,8 +367,8 @@ body {
         height: 100%;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
-        gap: 1.5rem;
+        gap: 1.3rem;
+        position: relative;
 
         .your-rating {
           p {
@@ -394,6 +409,9 @@ body {
           }
         }
         .float-right {
+          position: absolute;
+          bottom: 0;
+          right: 0;
           .btn {
             float: right !important;
             font-size: 1rem;
