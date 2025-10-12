@@ -41,7 +41,7 @@ $darkestColor: color.adjust($primaryColor, $lightness: -55%);
 body {
   font-family: Arial, Helvetica, sans-serif;
   height: 100%;
-  width: 100%;
+  width: 100vw;
   background-color: $darkestColor;
   color: #fff;
 
@@ -62,6 +62,10 @@ body {
       span {
         font-size: 2.5rem;
       }
+    }
+
+    a {
+      text-decoration: none;
     }
 
     .search {
@@ -85,113 +89,129 @@ body {
 
   main {
     display: flex;
-    flex-direction: column;
+    width: 100%;
     justify-content: center;
-    align-items: center;
-    padding: 2rem;
-    gap: 2rem;
-    position: relative;
 
-    nav {
+    .main-container {
       display: flex;
-      justify-content: space-between;
-      max-width: 76rem;
-      width: 100%;
-
-      a {
-        background-color: $darkestColor;
-        width: 100%;
-        padding: 1rem;
-        border-radius: 0.5rem;
-        text-decoration: none;
-        color: #fff;
-        font-weight: 600;
-        text-align: center;
-        border-bottom: 1px solid $primaryColor;
-        border-top: 1px solid $primaryColor;
-
-        &.active {
-          background: linear-gradient(
-            90deg,
-            $darkestColor,
-            $primaryColor,
-            $darkestColor
-          );
-        }
-      }
-    }
-
-    .movie-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-      max-width: 76rem;
-
-      .movie {
-        width: 12rem;
-        height: 17rem;
-        overflow: hidden;
-        position: relative;
-        border-radius: 0.7rem;
-        cursor: pointer;
-
-        img {
-          background-size: cover;
-          width: 12rem;
-          height: 17rem;
-        }
-        h3 {
-          position: absolute;
-          bottom: 0;
-          font-weight: 600;
-          text-align: center;
-          width: 100%;
-          height: auto;
-          padding: 0.5rem;
-          padding-top: 0;
-          color: white;
-          background-color: rgba(0, 0, 0, 0.635);
-          box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.635);
-        }
-      }
-    }
-    .watched-movie {
-      display: flex;
-      flex-wrap: wrap;
-      max-width: 75rem;
+      flex-direction: column;
       justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      gap: 2rem;
+      position: relative;
+      max-width: 76rem;
+      width: 76rem;
 
-      ul {
+      nav {
         display: flex;
         justify-content: space-between;
-        gap: 1rem;
+        width: 100%;
+
+        a {
+          background-color: $darkestColor;
+          width: 100%;
+          padding: 1rem;
+          border-radius: 0.5rem;
+          text-decoration: none;
+          color: #fff;
+          font-weight: 600;
+          text-align: center;
+          border-bottom: 1px solid $primaryColor;
+          border-top: 1px solid $primaryColor;
+
+          &.active {
+            background: linear-gradient(
+              90deg,
+              $darkestColor,
+              $primaryColor,
+              $darkestColor
+            );
+          }
+        }
+      }
+
+      .search-results {
+        width: 100%;
+        display: flex;
+        justify-content: start;
+        line-height: 3rem;
+        font-size: 1.5rem;
+        border-bottom: 1px solid $primaryColor;
+      }
+
+      .movie-list {
+        display: flex;
         flex-wrap: wrap;
+        gap: 0.8rem;
+        max-width: 76rem;
 
-        li {
-          display: flex;
-          width: 24.3rem;
-          border: 3px solid black;
-          background-color: red;
+        .movie {
+          height: 17rem;
+          width: 11.6rem;
+          overflow: hidden;
+          position: relative;
+          border-radius: 0.7rem;
+          cursor: pointer;
 
-          .details {
-            padding: 1rem;
-            display: flex;
-            justify-content: space-between;
+          img {
+            background-size: cover;
             width: 100%;
+            height: 100%;
+          }
+          h3 {
+            position: absolute;
+            bottom: 0;
+            font-weight: 600;
+            text-align: center;
+            width: 100%;
+            height: auto;
+            padding: 0.5rem;
+            padding-top: 0;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.635);
+            box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.635);
+          }
+        }
+      }
+      .watched-movie {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 75rem;
+        justify-content: center;
 
-            .header {
+        ul {
+          display: flex;
+          justify-content: space-between;
+          gap: 1rem;
+          flex-wrap: wrap;
+
+          li {
+            display: flex;
+            width: 24.3rem;
+            border: 3px solid black;
+            background-color: red;
+
+            .details {
+              padding: 1rem;
               display: flex;
               justify-content: space-between;
               width: 100%;
+
+              .header {
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+              }
+
+              .title {
+                font-size: 1.5rem;
+              }
             }
 
-            .title {
-              font-size: 1.5rem;
+            img {
+              width: 10rem;
             }
-          }
-
-          img {
-            width: 10rem;
           }
         }
       }

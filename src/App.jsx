@@ -139,16 +139,20 @@ export default function App() {
           <NavLink to="/watch">Watch List</NavLink>
           <NavLink to="/watched">Watched List</NavLink>
         </Navigation>
-        <SearchResults />
         <Routes>
           <Route
             path="/"
             element={
-              <MovieList
-                movies={movies}
-                onSelectMovie={handleSelectMovie}
-                isLoading={isLoading}
-              />
+              <>
+                {query && results > 0 && (
+                  <SearchResults results={results} query={query} />
+                )}
+                <MovieList
+                  movies={movies}
+                  onSelectMovie={handleSelectMovie}
+                  isLoading={isLoading}
+                />
+              </>
             }
           />
           <Route path="/watch" element={<WatchList />} />
