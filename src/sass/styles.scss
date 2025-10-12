@@ -73,14 +73,33 @@ body {
 
       input[type="text"] {
         width: 100%;
+        max-width: 25rem;
         line-height: 3rem;
         border-radius: 2rem;
         border: none;
-        padding-left: 1rem;
+        padding-left: 1.3rem;
         font-size: 1.1rem;
+        background-color: rgba(128, 128, 128, 0.315);
+        color: #fff;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background-color: #ffffffd8;
+          opacity: 1;
+          color: rgba(0, 0, 0, 0.839);
+        }
+
+        &:disabled {
+          color: #fff;
+          background-color: color.adjust($primaryColor, $lightness: -35%), 0.6;
+
+          &:hover {
+            background-color: rgba(128, 128, 128, 0.315);
+          }
+        }
 
         &::placeholder {
-          color: rgba(128, 128, 128, 0.568);
+          color: #fff;
           font-size: 1rem;
         }
       }
@@ -97,7 +116,7 @@ body {
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 1rem;
+      padding: 2rem;
       gap: 2rem;
       position: relative;
       max-width: 76rem;

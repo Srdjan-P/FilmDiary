@@ -131,7 +131,11 @@ export default function App() {
         <NavLink to="/" onClick={() => setQuery("")}>
           <Logo />
         </NavLink>
-        <Search query={query} setQuery={setQuery} />
+        <Search
+          query={query}
+          setQuery={setQuery}
+          disabled={location.pathname !== "/"}
+        />
       </Header>
       <Main>
         <Navigation>

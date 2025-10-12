@@ -1,4 +1,4 @@
-export default function Search({ query, setQuery }) {
+export default function Search({ query, setQuery, disabled }) {
   return (
     <div className="search">
       <input
@@ -6,6 +6,7 @@ export default function Search({ query, setQuery }) {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search for movies.."
+        disabled={disabled}
       />
     </div>
   );
