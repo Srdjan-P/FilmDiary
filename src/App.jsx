@@ -180,6 +180,7 @@ export default function App() {
           setUserRating={setUserRating}
           comment={comment}
           setComment={setComment}
+          watched={watched}
         />
       )}
     </>

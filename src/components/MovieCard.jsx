@@ -12,10 +12,14 @@ export default function MovieCard({
   setUserRating,
   comment,
   setComment,
+  watched,
 }) {
   const [movieDetails, setMovieDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [watchedBox, setWatchedBox] = useState(false);
+  const isMovieWatched = watched.some(
+    (movie) => movie.imdbID === selectedMovie?.imdbID
+  );
 
   useEffect(() => {
     async function fetchMovieDetails() {
@@ -56,6 +60,7 @@ export default function MovieCard({
       addedAt: new Date().toISOString(),
     };
     console.log("Addid to watced:", watchedMovie);
+
     onWatchedMovie(watchedMovie);
     onClose();
   }
@@ -120,10 +125,15 @@ export default function MovieCard({
                   <Button>
                     <span>+ </span> Watch List
                   </Button>
-                  <Button onClick={() => setWatchedBox(true)}>
-                    <span>+ </span>
-                    Watched List
-                  </Button>
+
+                  {isMovieWatched ? (
+                    <Button disabled>Already Watched</Button>
+                  ) : (
+                    <Button onClick={() => setWatchedBox(true)}>
+                      <span>+ </span>
+                      Watched List
+                    </Button>
+                  )}
                 </div>
               </>
             )}

@@ -33,6 +33,15 @@ $darkestColor: color.adjust($primaryColor, $lightness: -55%);
     transform: translatey(3px);
   }
 
+  &:disabled {
+    background: gray;
+    cursor: not-allowed;
+
+    &:active {
+      transform: none;
+    }
+  }
+
   span {
     font-size: 1.5rem;
   }
@@ -100,6 +109,7 @@ body {
 
           &:hover {
             background-color: rgba(128, 128, 128, 0.315);
+            cursor: not-allowed;
           }
         }
 
