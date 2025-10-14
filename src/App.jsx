@@ -46,6 +46,7 @@ export default function App() {
   const location = useLocation();
   const [userRating, setUserRating] = useState(null);
   const [comment, setComment] = useState("");
+  const [watchList, setWatchList] = useState([]);
 
   function handleSelectMovie(movie) {
     setSelectedMovie(movie);
@@ -59,9 +60,13 @@ export default function App() {
     setUserRating(0);
   }
 
-  function handleAddWatchedMovie(movie) {
+  function handleAddToWatchedList(movie) {
     setWatched((watched) => [...watched, movie]);
     setUserRating(0);
+  }
+
+  function handleAddToWatchList(movie) {
+    setWatchList((watchList) => [...watchList, movie]);
   }
 
   useEffect(() => {
@@ -128,8 +133,7 @@ export default function App() {
     return () => clearTimeout(timer);
   }, [query, location.pathname]);
 
-  console.log("watched", watched);
-  console.log("userRating", userRating);
+  console.log("watchList", watchList);
 
   return (
     <>
@@ -165,7 +169,16 @@ export default function App() {
               </>
             }
           />
-          <Route path="/watch" element={<WatchList />} />
+          <Route
+            path="/watch"
+            element={
+              <WatchList
+                watchList={watchList}
+                onSelectMovie={handleSelectMovie}
+                isLoading={isLoading}
+              />
+            }
+          />
           <Route path="/watched" element={<WatchedList watched={watched} />} />
         </Routes>
       </Main>
@@ -174,13 +187,16 @@ export default function App() {
         <MovieCard
           selectedMovie={selectedMovie}
           onClose={handleCloseMovie}
-          onWatchedMovie={handleAddWatchedMovie}
+          onWatchedMovie={handleAddToWatchedList}
           KEY={KEY}
           userRating={userRating}
           setUserRating={setUserRating}
           comment={comment}
           setComment={setComment}
           watched={watched}
+          onAddToWatchList={handleAddToWatchList}
+          location={location}
+          watchList={watchList}
         />
       )}
     </>

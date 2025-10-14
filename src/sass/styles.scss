@@ -35,6 +35,7 @@ $darkestColor: color.adjust($primaryColor, $lightness: -55%);
 
   &:disabled {
     background: gray;
+    padding: 0.5rem;
     cursor: not-allowed;
 
     &:active {
@@ -238,7 +239,6 @@ body {
             .details {
               display: flex;
               flex-direction: column;
-              gap: 1rem;
               width: 100%;
               height: 10rem;
 
@@ -263,6 +263,9 @@ body {
               .comment {
                 display: flex;
                 flex-direction: column;
+                justify-content: center;
+                height: 100%;
+                align-items: center;
                 gap: 1rem;
                 overflow: auto;
                 padding: 0.5rem 1rem;
@@ -272,6 +275,40 @@ body {
             img {
               width: 10rem;
             }
+          }
+        }
+      }
+      .watch-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        max-width: 76rem;
+
+        .movie {
+          height: 17rem;
+          width: 12rem;
+          overflow: hidden;
+          position: relative;
+          border-radius: 0.7rem;
+          cursor: pointer;
+
+          img {
+            background-size: cover;
+            width: 100%;
+            height: 100%;
+          }
+          h3 {
+            position: absolute;
+            bottom: 0;
+            font-weight: 600;
+            text-align: center;
+            width: 100%;
+            height: auto;
+            padding: 0.5rem;
+            padding-top: 0;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.635);
+            box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.635);
           }
         }
       }
@@ -364,6 +401,10 @@ body {
           position: absolute;
           bottom: 1.5rem;
           width: 90%;
+
+          > button:only-of-type {
+            margin-left: auto;
+          }
         }
       }
 

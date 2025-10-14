@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Button from "./Button";
 import Loader from "./Loader";
 import Feedback from "./Feedback";
+import WatchList from "./WatchList";
 
 export default function MovieCard({
   selectedMovie,
@@ -13,11 +14,17 @@ export default function MovieCard({
   comment,
   setComment,
   watched,
+  onAddToWatchList,
+  location,
+  watchList,
 }) {
   const [movieDetails, setMovieDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [watchedBox, setWatchedBox] = useState(false);
   const isMovieWatched = watched.some(
+    (movie) => movie.imdbID === selectedMovie?.imdbID
+  );
+  const isMovieOnWatchList = watchList.some(
     (movie) => movie.imdbID === selectedMovie?.imdbID
   );
 
@@ -42,7 +49,7 @@ export default function MovieCard({
     fetchMovieDetails();
   }, [selectedMovie?.imdbID, KEY]);
 
-  function handleAddToWatched() {
+  function handleAddToWatchedList() {
     if (!movieDetails) {
       console.error("No movie details available");
       return;
@@ -59,10 +66,67 @@ export default function MovieCard({
       comment,
       addedAt: new Date().toISOString(),
     };
-    console.log("Addid to watced:", watchedMovie);
 
     onWatchedMovie(watchedMovie);
     onClose();
+  }
+
+  function handleAddToWatchList() {
+    if (!movieDetails) {
+      console.error("No movie details available");
+      return;
+    }
+
+    const watchMovie = {
+      imdbID: movieDetails.imdbID,
+      title: movieDetails.Title,
+      year: movieDetails.Year,
+      poster: movieDetails.Poster,
+      imdbRating: movieDetails.imdbRating,
+      runtime: movieDetails.Runtime,
+      userRating,
+      comment,
+      addedAt: new Date().toISOString(),
+    };
+
+    onAddToWatchList(watchMovie);
+    onClose();
+  }
+
+  function renderButtons() {
+    if (location.pathname !== "/") {
+      return (
+        <Button onClick={() => setWatchedBox(true)}>
+          <span>+ </span>Watched List
+        </Button>
+      );
+    }
+
+    if (isMovieWatched) {
+      return <Button disabled>Already Watched</Button>;
+    }
+
+    if (isMovieOnWatchList) {
+      return (
+        <>
+          <Button disabled>Already on Watch List</Button>
+          <Button onClick={() => setWatchedBox(true)}>
+            <span>+ </span>Watched List
+          </Button>
+        </>
+      );
+    }
+
+    return (
+      <>
+        <Button onClick={handleAddToWatchList}>
+          <span>+ </span>Watch List
+        </Button>
+        <Button onClick={() => setWatchedBox(true)}>
+          <span>+</span>Watched List
+        </Button>
+      </>
+    );
   }
 
   return (
@@ -91,7 +155,7 @@ export default function MovieCard({
             <div className="description">{movieDetails?.Plot}</div>
             {watchedBox ? (
               <Feedback
-                onAddToWatched={handleAddToWatched}
+                onAddToWatched={handleAddToWatchedList}
                 setUserRating={setUserRating}
                 setComment={setComment}
                 comment={comment}
@@ -121,20 +185,7 @@ export default function MovieCard({
                     <span className="data">{movieDetails?.Actors}</span>
                   </div>
                 </div>
-                <div className="buttons">
-                  <Button>
-                    <span>+ </span> Watch List
-                  </Button>
-
-                  {isMovieWatched ? (
-                    <Button disabled>Already Watched</Button>
-                  ) : (
-                    <Button onClick={() => setWatchedBox(true)}>
-                      <span>+ </span>
-                      Watched List
-                    </Button>
-                  )}
-                </div>
+                <div className="buttons">{renderButtons()}</div>
               </>
             )}
           </div>
