@@ -17,6 +17,7 @@ export default function MovieCard({
   onAddToWatchList,
   location,
   watchList,
+  onRemoveMovie,
 }) {
   const [movieDetails, setMovieDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -96,9 +97,17 @@ export default function MovieCard({
   function renderButtons() {
     if (location.pathname !== "/") {
       return (
-        <Button onClick={() => setWatchedBox(true)}>
-          <span>+ </span>Watched List
-        </Button>
+        <>
+          <Button
+            className="delete-btn"
+            onClick={() => onRemoveMovie(selectedMovie.imdbID)}
+          >
+            <span>-</span>Watch List
+          </Button>
+          <Button onClick={() => setWatchedBox(true)}>
+            <span>+ </span>Watched List
+          </Button>
+        </>
       );
     }
 

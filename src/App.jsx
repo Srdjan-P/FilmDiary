@@ -63,10 +63,18 @@ export default function App() {
   function handleAddToWatchedList(movie) {
     setWatched((watched) => [...watched, movie]);
     setUserRating(0);
+    handleRemoveMovie(movie.imdbID);
   }
 
   function handleAddToWatchList(movie) {
     setWatchList((watchList) => [...watchList, movie]);
+  }
+
+  function handleRemoveMovie(id) {
+    setWatchList((watchList) =>
+      watchList.filter((movie) => movie.imdbID !== id)
+    );
+    setIsOpen(false);
   }
 
   useEffect(() => {
@@ -176,6 +184,7 @@ export default function App() {
                 watchList={watchList}
                 onSelectMovie={handleSelectMovie}
                 isLoading={isLoading}
+                setWatchList={setWatchList}
               />
             }
           />
@@ -197,6 +206,7 @@ export default function App() {
           onAddToWatchList={handleAddToWatchList}
           location={location}
           watchList={watchList}
+          onRemoveMovie={handleRemoveMovie}
         />
       )}
     </>

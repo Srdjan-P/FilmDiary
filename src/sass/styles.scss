@@ -2,17 +2,20 @@
 @use "sass:color";
 
 $primaryColor: rgb(67, 97, 238);
-$lightColor: color.adjust($primaryColor, $lightness: 5%);
-$darkColor: color.adjust($primaryColor, $lightness: -10%);
-$darkerColor: color.adjust($primaryColor, $lightness: -45%);
-$darkestColor: color.adjust($primaryColor, $lightness: -55%);
+$secondaryColor: red;
+$primaryLightColor: color.adjust($primaryColor, $lightness: 5%);
+$primaryDarkColor: color.adjust($primaryColor, $lightness: -10%);
+$primaryDarkerColor: color.adjust($primaryColor, $lightness: -45%);
+$primaryDarkestColor: color.adjust($primaryColor, $lightness: -55%);
+$secondaryDarkColor: color.adjust($secondaryColor, $lightness: -10%);
+$secondaryDarkerColor: color.adjust($secondaryColor, $lightness: -30%);
 
 * {
   box-sizing: border-box;
 }
 
 .btn {
-  background: linear-gradient(90deg, $primaryColor, $darkColor);
+  background: linear-gradient(90deg, $primaryColor, $primaryDarkColor);
   width: fit-content;
   color: #fff;
   cursor: pointer;
@@ -25,8 +28,16 @@ $darkestColor: color.adjust($primaryColor, $lightness: -55%);
   transition: all 0.1s ease;
   border: none;
 
+  &.delete-btn {
+    background: $secondaryColor;
+
+    &:hover {
+      background: $secondaryDarkerColor;
+    }
+  }
+
   &:hover {
-    background: linear-gradient(90deg, $darkColor, $darkerColor);
+    background: linear-gradient(90deg, $primaryDarkColor, $primaryDarkerColor);
   }
 
   &:active {
@@ -52,7 +63,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   height: 100%;
   width: 100%;
-  background-color: $darkestColor;
+  background-color: $primaryDarkestColor;
   color: #fff;
 
   header {
@@ -60,7 +71,7 @@ body {
     display: flex;
     justify-content: space-between;
     padding: 2rem;
-    background: linear-gradient(180deg, $primaryColor, $darkestColor);
+    background: linear-gradient(180deg, $primaryColor, $primaryDarkestColor);
 
     .logo {
       color: #fff;
@@ -143,7 +154,7 @@ body {
         width: 100%;
 
         a {
-          background-color: $darkestColor;
+          background-color: $primaryDarkestColor;
           width: 100%;
           padding: 1rem;
           border-radius: 0.5rem;
@@ -157,9 +168,9 @@ body {
           &.active {
             background: linear-gradient(
               90deg,
-              $darkestColor,
+              $primaryDarkestColor,
               $primaryColor,
-              $darkestColor
+              $primaryDarkestColor
             );
           }
         }
@@ -247,9 +258,9 @@ body {
                 justify-content: space-between;
                 width: 100%;
                 align-items: center;
-                background-color: $darkestColor;
+                background-color: $primaryDarkestColor;
                 padding: 0.5rem 1rem;
-                box-shadow: 0 0 10px 1px $darkColor;
+                box-shadow: 0 0 10px 1px $primaryDarkColor;
 
                 .star {
                   font-size: 1.2rem;
@@ -283,6 +294,7 @@ body {
         flex-wrap: wrap;
         gap: 0.8rem;
         max-width: 76rem;
+        width: 100%;
 
         .movie {
           height: 17rem;
