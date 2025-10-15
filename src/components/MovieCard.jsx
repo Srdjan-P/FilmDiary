@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Button from "./Button";
 import Loader from "./Loader";
 import Feedback from "./Feedback";
-import WatchList from "./WatchList";
+import noPoster from "../assets/no_poster.png";
 
 export default function MovieCard({
   selectedMovie,
@@ -145,7 +145,14 @@ export default function MovieCard({
       ) : (
         <div className="movie-card">
           <div className="movie-poster">
-            <img src={movieDetails?.Poster} alt="" />
+            <img
+              src={movieDetails?.Poster}
+              alt={`${movieDetails?.Title} poster`}
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = noPoster;
+              }}
+            />
           </div>
           <div className="movie-details">
             <div className="movie-details-header">

@@ -1,9 +1,18 @@
+import noPoster from "../assets/no_poster.png";
+
 export default function WatchedMovie({ movie }) {
   return (
     <>
       <li>
         <div className="movie-poster">
-          <img src={movie.poster} alt="" />
+          <img
+            src={movie.poster}
+            alt={`${movie.title} poster`}
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = noPoster;
+            }}
+          />
         </div>
         <div className="details">
           <div className="header">

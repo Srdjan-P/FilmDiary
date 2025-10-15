@@ -70,7 +70,8 @@ body {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 2rem;
+    gap: 2rem;
+    padding: 1.5rem 2rem 3rem 2rem;
     background: linear-gradient(180deg, $primaryColor, $primaryDarkestColor);
 
     .logo {
@@ -87,10 +88,12 @@ body {
 
     a {
       text-decoration: none;
+      display: flex;
     }
 
     .search {
-      width: 30%;
+      max-width: 25rem;
+      width: 100%;
       min-width: 15rem;
 
       input[type="text"] {
