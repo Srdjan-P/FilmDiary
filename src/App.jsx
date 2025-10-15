@@ -23,7 +23,7 @@ const initialMovies = [
   "lucifer",
   "lethal weapon",
   "jurassic world",
-  "armageddon",
+  "serendipity",
   "inception",
   "die hard",
 ];
@@ -136,7 +136,7 @@ export default function App() {
       } finally {
         setIsLoading(false);
       }
-    }, 500);
+    }, 800);
 
     return () => clearTimeout(timer);
   }, [query, location.pathname]);

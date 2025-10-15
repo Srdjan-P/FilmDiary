@@ -10,6 +10,14 @@ $primaryDarkestColor: color.adjust($primaryColor, $lightness: -55%);
 $secondaryDarkColor: color.adjust($secondaryColor, $lightness: -10%);
 $secondaryDarkerColor: color.adjust($secondaryColor, $lightness: -30%);
 
+@mixin grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  justify-content: center;
+  gap: 0.8rem;
+  width: 100%;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -149,7 +157,7 @@ body {
       gap: 2rem;
       position: relative;
       max-width: 76rem;
-      width: 76rem;
+      width: 100%;
 
       nav {
         display: flex;
@@ -167,6 +175,9 @@ body {
           text-align: center;
           border-bottom: 1px solid $primaryColor;
           border-top: 1px solid $primaryColor;
+          display: flex;
+          justify-content: center;
+          align-items: center;
 
           &.active {
             background: linear-gradient(
@@ -189,14 +200,8 @@ body {
       }
 
       .movie-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.8rem;
-        max-width: 76rem;
-
+        @include grid;
         .movie {
-          height: 17rem;
-          width: 12rem;
           overflow: hidden;
           position: relative;
           border-radius: 0.7rem;
@@ -206,6 +211,7 @@ body {
             background-size: cover;
             width: 100%;
             height: 100%;
+            object-fit: cover;
           }
           h3 {
             position: absolute;
@@ -223,26 +229,26 @@ body {
         }
       }
       .watched-list {
-        display: flex;
-        flex-wrap: wrap;
-        max-width: 75rem;
         width: 100%;
 
         ul {
-          display: flex;
           gap: 1rem;
-          flex-wrap: wrap;
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+          justify-items: center;
+          gap: 1rem;
+          width: 100%;
 
           li {
             display: flex;
             flex-direction: column;
-            width: 18rem;
             background-color: rgba(56, 56, 56, 0.301);
             box-shadow: 0 0 4px 0.5px $primaryColor;
+            object-fit: cover;
 
             .movie-poster {
               width: 100%;
-              height: 15rem;
+              height: 13rem;
               overflow: hidden;
 
               img {
@@ -283,6 +289,7 @@ body {
                 gap: 1rem;
                 overflow: auto;
                 padding: 0.5rem 1rem;
+                text-align: center;
               }
             }
 
@@ -293,19 +300,14 @@ body {
         }
       }
       .watch-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.8rem;
-        max-width: 76rem;
-        width: 100%;
+        @include grid;
 
         .movie {
-          height: 17rem;
-          width: 12rem;
           overflow: hidden;
           position: relative;
           border-radius: 0.7rem;
           cursor: pointer;
+          object-fit: cover;
 
           img {
             background-size: cover;
@@ -339,6 +341,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 1rem;
 
     .movie-card {
       width: 50rem;
@@ -482,6 +485,124 @@ body {
             float: right !important;
             font-size: 1rem;
             padding: 0.4rem 2rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 740px) {
+  body {
+    header {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      gap: 1rem;
+    }
+
+    main {
+      padding: 1rem;
+
+      .main-container {
+        width: 100%;
+        gap: 1rem;
+
+        .movie-list,
+        .watch-list,
+        .watched-list {
+          grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+          gap: 1rem;
+        }
+
+        .watched-list {
+          ul {
+            grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+
+            li {
+              .movie-poster {
+                height: 10rem;
+              }
+
+              .details {
+                min-height: 8rem;
+                height: auto;
+
+                .header {
+                  padding: 0.3rem 0.5rem;
+
+                  .title {
+                    font-size: 1rem;
+                  }
+
+                  .star {
+                    font-size: 1rem;
+                  }
+                }
+
+                .comment {
+                  padding: 0.3rem;
+                  font-size: 0.8rem;
+                }
+              }
+            }
+          }
+
+          .movie-list .movie,
+          .watch-list .movie {
+            height: 14rem;
+
+            h3 {
+              font-size: 0.9rem;
+              padding: 0.3rem;
+            }
+          }
+        }
+        nav {
+          a {
+            font-size: 0.9rem;
+            padding: 0.8rem;
+          }
+        }
+
+        .search-results {
+          font-size: 1.2rem;
+          line-height: 2rem;
+        }
+      }
+    }
+
+    .movie-card-wrapper {
+      .movie-card {
+        height: auto;
+        max-height: 90vh;
+        flex-direction: column;
+
+        .movie-poster {
+          width: 100%;
+          overflow: hidden;
+          height: 20rem;
+
+          img {
+            width: 100%;
+            height: auto;
+            border-radius: 0.5rem 0.5rem 0 0;
+          }
+        }
+
+        .movie-details {
+          padding: 1rem;
+
+          .movie-title {
+            font-size: 1.5rem;
+          }
+
+          .buttons {
+            width: 100%;
+            position: relative;
+            bottom: auto;
+            margin-top: 1rem;
           }
         }
       }

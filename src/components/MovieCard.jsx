@@ -20,7 +20,7 @@ export default function MovieCard({
   onRemoveMovie,
 }) {
   const [movieDetails, setMovieDetails] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [watchedBox, setWatchedBox] = useState(false);
   const isMovieWatched = watched.some(
     (movie) => movie.imdbID === selectedMovie?.imdbID
@@ -32,6 +32,12 @@ export default function MovieCard({
   useEffect(() => {
     async function fetchMovieDetails() {
       if (!selectedMovie?.imdbID) return;
+
+      if (movieDetails?.imdbID === selectedMovie.imdbID) {
+        setIsLoading(false);
+        return;
+      }
+
       setIsLoading(true);
 
       try {
@@ -48,7 +54,7 @@ export default function MovieCard({
       }
     }
     fetchMovieDetails();
-  }, [selectedMovie?.imdbID, KEY]);
+  }, [selectedMovie?.imdbID, KEY, movieDetails]);
 
   function handleAddToWatchedList() {
     if (!movieDetails) {
