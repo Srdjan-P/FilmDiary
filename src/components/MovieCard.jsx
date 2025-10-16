@@ -45,7 +45,6 @@ export default function MovieCard({
         const res = await fetch(url);
         const data = await res.json();
 
-        console.log(data);
         setMovieDetails(data);
       } catch (error) {
         console.error("Error fetching movie details", error);
@@ -150,6 +149,9 @@ export default function MovieCard({
         <Loader />
       ) : (
         <div className="movie-card">
+          <span className="close" onClick={onClose}>
+            ❌
+          </span>
           <div className="movie-poster">
             <img
               src={movieDetails?.Poster}
@@ -163,9 +165,6 @@ export default function MovieCard({
           <div className="movie-details">
             <div className="movie-details-header">
               <div className="movie-title">{movieDetails?.Title}</div>
-              <span className="close" onClick={onClose}>
-                ❌
-              </span>
             </div>
             <div className="stats">
               <span className="rating">

@@ -10,6 +10,7 @@ import MovieCard from "./components/MovieCard";
 import { Routes, Route, NavLink, useLocation } from "react-router";
 import WatchList from "./components/WatchList";
 import WatchedList from "./components/WatchedList";
+import ClearList from "./components/ClearList";
 
 const KEY = "40bcec08";
 
@@ -47,6 +48,7 @@ export default function App() {
   const [userRating, setUserRating] = useState(null);
   const [comment, setComment] = useState("");
   const [watchList, setWatchList] = useState([]);
+  const [confirmation, setConfirmation] = useState(false);
 
   function handleSelectMovie(movie) {
     setSelectedMovie(movie);
@@ -75,6 +77,16 @@ export default function App() {
       watchList.filter((movie) => movie.imdbID !== id)
     );
     setIsOpen(false);
+  }
+
+  function handleClearList() {
+    if (location.pathname === "/watch") {
+      setConfirmation(false);
+      return setWatchList([]);
+    } else if (location.pathname === "/watched") {
+      setConfirmation(false);
+      return setWatched([]);
+    }
   }
 
   useEffect(() => {
@@ -141,8 +153,6 @@ export default function App() {
     return () => clearTimeout(timer);
   }, [query, location.pathname]);
 
-  console.log("watchList", watchList);
-
   return (
     <>
       <Header>
@@ -184,12 +194,20 @@ export default function App() {
                 watchList={watchList}
                 onSelectMovie={handleSelectMovie}
                 isLoading={isLoading}
-                setWatchList={setWatchList}
+                setConfirmation={setConfirmation}
+              />
+            }
+          />
+          <Route
+            path="/watched"
+            element={
+              <WatchedList
+                watched={watched}
+                setConfirmation={setConfirmation}
                 isLoading={isLoading}
               />
             }
           />
-          <Route path="/watched" element={<WatchedList watched={watched} />} />
         </Routes>
       </Main>
 
@@ -208,6 +226,12 @@ export default function App() {
           location={location}
           watchList={watchList}
           onRemoveMovie={handleRemoveMovie}
+        />
+      )}
+      {confirmation && (
+        <ClearList
+          setConfirmation={setConfirmation}
+          onConfirmation={handleClearList}
         />
       )}
     </>

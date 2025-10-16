@@ -1,7 +1,8 @@
+import Button from "./Button";
 import SearchResults from "./SearchResults";
 import WatchedMovie from "./WatchedMovie";
 
-export default function WatchedList({ watched, isLoading }) {
+export default function WatchedList({ watched, isLoading, setConfirmation }) {
   return (
     <>
       {isLoading ? (
@@ -10,6 +11,9 @@ export default function WatchedList({ watched, isLoading }) {
         <>
           <SearchResults>
             You have {watched.length} titles on your list
+            {watched.length > 0 && (
+              <Button onClick={() => setConfirmation(true)}>CLEAR LIST</Button>
+            )}
           </SearchResults>
           <div className="watched-list">
             <ul>

@@ -1,10 +1,14 @@
 import Loader from "./Loader";
 import SearchResults from "./SearchResults";
 import WatchMovie from "./WatchMovie";
+import Button from "./Button";
 
-export default function WatchList({ watchList, onSelectMovie, isLoading }) {
-  console.log(watchList.length);
-
+export default function WatchList({
+  watchList,
+  onSelectMovie,
+  isLoading,
+  setConfirmation,
+}) {
   return (
     <>
       {isLoading ? (
@@ -13,6 +17,9 @@ export default function WatchList({ watchList, onSelectMovie, isLoading }) {
         <>
           <SearchResults>
             You have {watchList.length} titles on your list
+            {watchList.length > 0 && (
+              <Button onClick={() => setConfirmation(true)}>CLEAR LIST</Button>
+            )}
           </SearchResults>
           <ul className="watch-list">
             {watchList?.map((movie) => (
