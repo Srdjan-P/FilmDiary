@@ -1,3 +1,3 @@
-export default function SearchResults({ query }) {
-  return <h2 className="search-results">Search results for "{query}"</h2>;
+export default function SearchResults({ children }) {
+  return <h2 className="search-results">{children}</h2>;
 }

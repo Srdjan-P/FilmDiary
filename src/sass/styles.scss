@@ -435,6 +435,7 @@ body {
       .feedback {
         height: 100%;
         display: flex;
+        justify-content: space-between;
         flex-direction: column;
         gap: 1.3rem;
         position: relative;
@@ -477,15 +478,11 @@ body {
             }
           }
         }
-        .float-right {
-          position: absolute;
-          bottom: 0;
-          right: 0;
-          .btn {
-            float: right !important;
-            font-size: 1rem;
-            padding: 0.4rem 2rem;
-          }
+
+        .btn {
+          float: right !important;
+          font-size: 1rem;
+          padding: 0.4rem 2rem;
         }
       }
     }
@@ -543,7 +540,7 @@ body {
 
                 .comment {
                   padding: 0.3rem;
-                  font-size: 0.8rem;
+                  font-size: 0.9rem;
                 }
               }
             }

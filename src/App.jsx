@@ -167,7 +167,7 @@ export default function App() {
             element={
               <>
                 {query && results > 0 && (
-                  <SearchResults results={results} query={query} />
+                  <SearchResults>Search results for "{query}"</SearchResults>
                 )}
                 <MovieList
                   movies={movies}
@@ -185,6 +185,7 @@ export default function App() {
                 onSelectMovie={handleSelectMovie}
                 isLoading={isLoading}
                 setWatchList={setWatchList}
+                isLoading={isLoading}
               />
             }
           />
