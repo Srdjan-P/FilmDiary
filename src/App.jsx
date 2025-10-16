@@ -97,7 +97,7 @@ export default function App() {
           let allMovies = [];
 
           for (const term of initialMovies) {
-            const url = `http://www.omdbapi.com/?apikey=${KEY}&s=${term}`;
+            const url = `https://www.omdbapi.com/?apikey=${KEY}&s=${term}`;
             const res = await fetch(url);
             const data = await res.json();
 
@@ -131,7 +131,7 @@ export default function App() {
       setIsLoading(true);
 
       try {
-        const url = `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`;
+        const url = `https://www.omdbapi.com/?apikey=${KEY}&s=${query}`;
         const res = await fetch(url);
         const data = await res.json();
 

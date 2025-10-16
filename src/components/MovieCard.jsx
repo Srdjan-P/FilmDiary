@@ -41,7 +41,7 @@ export default function MovieCard({
       setIsLoading(true);
 
       try {
-        const url = `http://www.omdbapi.com/?apikey=${KEY}&i=${selectedMovie.imdbID}`;
+        const url = `https://www.omdbapi.com/?apikey=${KEY}&i=${selectedMovie.imdbID}`;
         const res = await fetch(url);
         const data = await res.json();
 
