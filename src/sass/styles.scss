@@ -522,25 +522,57 @@ body {
   top: 0;
   height: 100%;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.454);
+  background-color: rgba(0, 0, 0, 0.57);
 
   .clear-list-window {
     width: 20rem;
     height: 20rem;
-    background: #e19c9c77;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
-    padding: 2rem;
+    box-shadow: 0 0 5px 1px $secondaryDarkColor;
+    border-radius: 1rem;
+    background: rgba(38, 12, 12, 0.528);
+
+    .confirmation-title {
+      border-radius: 1rem 1rem 0 0;
+      width: 100%;
+      height: 3rem;
+      padding: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 2px solid $secondaryDarkerColor;
+      font-size: 1.4rem;
+      font-weight: 600;
+      background: #00000059;
+    }
+
+    .confirmation-message {
+      background: #00000059;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5rem;
+      text-align: center;
+      padding: 2rem;
+    }
 
     .buttons {
       width: 100%;
       display: flex;
       justify-content: space-between;
+      padding: 1rem 2rem;
+      border-radius: 0 0 1rem 1rem;
+      border-top: 2px solid $secondaryDarkerColor;
+      background: #00000059;
 
       .btn {
-        padding: 0.5rem 1rem;
+        padding: 0.5rem 2rem;
+        font-size: 1rem;
+        font-weight: 600;
       }
     }
   }
@@ -669,9 +701,6 @@ body {
 
         .feedback-wrapper {
           flex: 1;
-
-          .feedback {
-          }
         }
       }
     }
