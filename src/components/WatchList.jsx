@@ -12,7 +12,9 @@ export default function WatchList({
   return (
     <>
       {isLoading ? (
-        <Loader />
+        <div className="loader-container">
+          <Loader />
+        </div>
       ) : (
         <>
           <SearchResults>

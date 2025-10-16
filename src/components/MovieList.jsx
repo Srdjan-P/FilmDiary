@@ -5,7 +5,9 @@ export default function MovieList({ movies, onSelectMovie, isLoading }) {
   return (
     <>
       {isLoading ? (
-        <Loader />
+        <div className="loader-container">
+          <Loader />
+        </div>
       ) : (
         <ul className="movie-list">
           {movies?.map((movie) => (

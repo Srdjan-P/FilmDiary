@@ -165,13 +165,13 @@ export default function MovieCard({
           <div className="movie-details">
             <div className="movie-details-header">
               <div className="movie-title">{movieDetails?.Title}</div>
-            </div>
-            <div className="stats">
-              <span className="rating">
-                <span>⭐</span>
-                {movieDetails?.imdbRating}
-              </span>{" "}
-              <span>{movieDetails?.Runtime}</span>
+              <div className="stats">
+                <span className="rating">
+                  <span>⭐</span>
+                  {movieDetails?.imdbRating}
+                </span>
+                <span>{movieDetails?.Runtime}</span>
+              </div>
             </div>
             <div className="description">{movieDetails?.Plot}</div>
             {watchedBox ? (

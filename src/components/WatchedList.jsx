@@ -7,7 +7,9 @@ export default function WatchedList({ watched, isLoading, setConfirmation }) {
   return (
     <>
       {isLoading ? (
-        <Loader />
+        <div className="loader-container">
+          <Loader />
+        </div>
       ) : (
         <>
           <SearchResults>
