@@ -1,4 +1,5 @@
 import Button from "./Button";
+import Loader from "./Loader";
 import SearchResults from "./SearchResults";
 import WatchedMovie from "./WatchedMovie";
 
