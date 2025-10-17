@@ -219,6 +219,7 @@ export default function App() {
                 watched={watched}
                 setConfirmation={setConfirmation}
                 isLoading={isLoading}
+                setWatched={setWatched}
               />
             }
           />

@@ -3,7 +3,16 @@ import Loader from "./Loader";
 import SearchResults from "./SearchResults";
 import WatchedMovie from "./WatchedMovie";
 
-export default function WatchedList({ watched, isLoading, setConfirmation }) {
+export default function WatchedList({
+  watched,
+  isLoading,
+  setConfirmation,
+  setWatched,
+}) {
+  function handleRemoveMovie(id) {
+    setWatched((watched) => watched.filter((movie) => movie.imdbID !== id));
+  }
+
   return (
     <>
       {isLoading ? (
@@ -21,7 +30,11 @@ export default function WatchedList({ watched, isLoading, setConfirmation }) {
           <div className="watched-list">
             <ul>
               {watched.map((movie) => (
-                <WatchedMovie movie={movie} key={movie.imdbID} />
+                <WatchedMovie
+                  movie={movie}
+                  key={movie.imdbID}
+                  onRemoveMovie={handleRemoveMovie}
+                />
               ))}
             </ul>
           </div>

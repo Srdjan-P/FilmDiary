@@ -1,9 +1,12 @@
 import noPoster from "../assets/no_poster.png";
 
-export default function WatchedMovie({ movie }) {
+export default function WatchedMovie({ movie, onRemoveMovie }) {
   return (
     <>
       <li>
+        <div className="delete-btn" onClick={() => onRemoveMovie(movie.imdbID)}>
+          ❌
+        </div>
         <div className="movie-poster">
           <img
             src={movie.poster}
