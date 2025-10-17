@@ -29,13 +29,6 @@ const initialMovies = [
   "KPop",
 ];
 
-// const mostPopularMovies = {
-//   ids: [
-//     "tt14205554", //KPop Demon Hunters
-//     "tt7991608", //Red Notice
-//   ],
-// };
-
 export default function App() {
   const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);

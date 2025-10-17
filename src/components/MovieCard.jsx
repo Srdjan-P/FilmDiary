@@ -33,13 +33,6 @@ export default function MovieCard({
     async function fetchMovieDetails() {
       if (!selectedMovie?.imdbID) return;
 
-      if (movieDetails?.imdbID === selectedMovie.imdbID) {
-        setIsLoading(false);
-        return;
-      }
-
-      setIsLoading(true);
-
       try {
         const url = `https://www.omdbapi.com/?apikey=${KEY}&i=${selectedMovie.imdbID}`;
         const res = await fetch(url);
@@ -88,10 +81,6 @@ export default function MovieCard({
       title: movieDetails.Title,
       year: movieDetails.Year,
       poster: movieDetails.Poster,
-      imdbRating: movieDetails.imdbRating,
-      runtime: movieDetails.Runtime,
-      userRating,
-      comment,
       addedAt: new Date().toISOString(),
     };
 

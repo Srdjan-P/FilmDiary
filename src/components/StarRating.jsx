@@ -112,5 +112,3 @@ function Star({ onRate, full, onHoverIn, onHoverOut, color, size }) {
     </span>
   );
 }
-
-<div style={{ color: "blue" }}></div>;
