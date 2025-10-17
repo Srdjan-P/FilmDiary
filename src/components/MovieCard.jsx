@@ -137,74 +137,77 @@ export default function MovieCard({
   }
 
   return (
-    <div className="movie-card-wrapper">
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <div className="movie-card">
-          <span className="close" onClick={onClose}>
-            ❌
-          </span>
-          <div className="movie-poster">
-            <img
-              src={movieDetails?.Poster}
-              alt={`${movieDetails?.Title} poster`}
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = noPoster;
-              }}
-            />
-          </div>
-          <div className="movie-details">
-            <div className="movie-details-header">
-              <div className="movie-title">{movieDetails?.Title}</div>
-              <div className="stats">
-                <span className="rating">
-                  <span>⭐</span>
-                  {movieDetails?.imdbRating}
-                </span>
-                <span>{movieDetails?.Runtime}</span>
-              </div>
-            </div>
-            {watchedBox ? (
-              <Feedback
-                onAddToWatched={handleAddToWatchedList}
-                setUserRating={setUserRating}
-                setComment={setComment}
-                comment={comment}
-                userRating={userRating}
+    <>
+      <div className="backdrop" onClick={onClose}></div>
+      <div className="movie-card-wrapper">
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <div className="movie-card">
+            <span className="close" onClick={onClose}>
+              ❌
+            </span>
+            <div className="movie-poster">
+              <img
+                src={movieDetails?.Poster}
+                alt={`${movieDetails?.Title} poster`}
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = noPoster;
+                }}
               />
-            ) : (
-              <>
-                <div className="description">{movieDetails?.Plot}</div>
-                <div className="elements">
-                  <div className="row">
-                    <span className="type">Country:</span>
-                    <span className="data">{movieDetails?.Country}</span>
-                  </div>
-                  <div className="row">
-                    <span className="type">Genre:</span>
-                    <span className="data">{movieDetails?.Genre}</span>
-                  </div>
-                  <div className="row">
-                    <span className="type">Released:</span>
-                    <span className="data">{movieDetails?.Released}</span>
-                  </div>
-                  <div className="row">
-                    <span className="type">Director:</span>
-                    <span className="data">{movieDetails?.Director}</span>
-                  </div>
-                  <div className="row">
-                    <span className="type">Casts:</span>
-                    <span className="data">{movieDetails?.Actors}</span>
-                  </div>
+            </div>
+            <div className="movie-details">
+              <div className="movie-details-header">
+                <div className="movie-title">{movieDetails?.Title}</div>
+                <div className="stats">
+                  <span className="rating">
+                    <span>⭐</span>
+                    {movieDetails?.imdbRating}
+                  </span>
+                  <span>{movieDetails?.Runtime}</span>
                 </div>
-                <div className="buttons">{renderButtons()}</div>
-              </>
-            )}
+              </div>
+              {watchedBox ? (
+                <Feedback
+                  onAddToWatched={handleAddToWatchedList}
+                  setUserRating={setUserRating}
+                  setComment={setComment}
+                  comment={comment}
+                  userRating={userRating}
+                />
+              ) : (
+                <>
+                  <div className="description">{movieDetails?.Plot}</div>
+                  <div className="elements">
+                    <div className="row">
+                      <span className="type">Country:</span>
+                      <span className="data">{movieDetails?.Country}</span>
+                    </div>
+                    <div className="row">
+                      <span className="type">Genre:</span>
+                      <span className="data">{movieDetails?.Genre}</span>
+                    </div>
+                    <div className="row">
+                      <span className="type">Released:</span>
+                      <span className="data">{movieDetails?.Released}</span>
+                    </div>
+                    <div className="row">
+                      <span className="type">Director:</span>
+                      <span className="data">{movieDetails?.Director}</span>
+                    </div>
+                    <div className="row">
+                      <span className="type">Casts:</span>
+                      <span className="data">{movieDetails?.Actors}</span>
+                    </div>
+                  </div>
+                  <div className="buttons">{renderButtons()}</div>
+                </>
+              )}
+            </div>
           </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </>
   );
 }
