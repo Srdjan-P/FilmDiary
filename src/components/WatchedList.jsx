@@ -7,12 +7,8 @@ export default function WatchedList({
   watched,
   isLoading,
   setConfirmation,
-  setWatched,
+  onRemoveMovie,
 }) {
-  function handleRemoveMovie(id) {
-    setWatched((watched) => watched.filter((movie) => movie.imdbID !== id));
-  }
-
   return (
     <>
       {isLoading ? (
@@ -33,7 +29,7 @@ export default function WatchedList({
                 <WatchedMovie
                   movie={movie}
                   key={movie.imdbID}
-                  onRemoveMovie={handleRemoveMovie}
+                  onRemoveMovie={onRemoveMovie}
                 />
               ))}
             </ul>

@@ -41,8 +41,7 @@ export default function App() {
   });
   const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
-  const [userRating, setUserRating] = useState(null);
-  const [comment, setComment] = useState("");
+
   const [watchList, setWatchList] = useState(() => {
     const storedValue = localStorage.getItem("watchList");
     return storedValue ? JSON.parse(storedValue) : [];
@@ -57,13 +56,10 @@ export default function App() {
   function handleCloseMovie() {
     setSelectedMovie(null);
     setIsOpen(false);
-    setComment("");
-    setUserRating(0);
   }
 
   function handleAddToWatchedList(movie) {
     setWatched((watched) => [...watched, movie]);
-    setUserRating(0);
     handleRemoveMovie(movie.imdbID);
   }
 
@@ -76,6 +72,10 @@ export default function App() {
       watchList.filter((movie) => movie.imdbID !== id)
     );
     setIsOpen(false);
+  }
+
+  function handleRemoveFromWatched(id) {
+    setWatched((watched) => watched.filter((movie) => movie.imdbID !== id));
   }
 
   function handleClearList() {
@@ -213,6 +213,7 @@ export default function App() {
                 setConfirmation={setConfirmation}
                 isLoading={isLoading}
                 setWatched={setWatched}
+                onRemoveMovie={handleRemoveFromWatched}
               />
             }
           />
@@ -225,10 +226,6 @@ export default function App() {
           onClose={handleCloseMovie}
           onWatchedMovie={handleAddToWatchedList}
           KEY={KEY}
-          userRating={userRating}
-          setUserRating={setUserRating}
-          comment={comment}
-          setComment={setComment}
           watched={watched}
           onAddToWatchList={handleAddToWatchList}
           location={location}

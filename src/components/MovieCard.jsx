@@ -9,10 +9,6 @@ export default function MovieCard({
   KEY,
   onClose,
   onWatchedMovie,
-  userRating,
-  setUserRating,
-  comment,
-  setComment,
   watched,
   onAddToWatchList,
   location,
@@ -22,12 +18,20 @@ export default function MovieCard({
   const [movieDetails, setMovieDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [watchedBox, setWatchedBox] = useState(false);
+  const [userRating, setUserRating] = useState(null);
+  const [comment, setComment] = useState("");
   const isMovieWatched = watched.some(
     (movie) => movie.imdbID === selectedMovie?.imdbID
   );
   const isMovieOnWatchList = watchList.some(
     (movie) => movie.imdbID === selectedMovie?.imdbID
   );
+
+  useEffect(() => {
+    setUserRating(null);
+    setComment("");
+    setWatchedBox(false);
+  }, [selectedMovie?.imdbID]);
 
   useEffect(() => {
     async function fetchMovieDetails() {
@@ -46,7 +50,7 @@ export default function MovieCard({
       }
     }
     fetchMovieDetails();
-  }, [selectedMovie?.imdbID, KEY, movieDetails]);
+  }, [selectedMovie?.imdbID, KEY]);
 
   function handleAddToWatchedList() {
     if (!movieDetails) {
