@@ -242,6 +242,7 @@ body {
           border-radius: 0.7rem;
           cursor: pointer;
           box-shadow: 0 0 5px 2px $primaryDarkerColor;
+          animation: popup 0.3s ease;
 
           &:hover {
             box-shadow: 0 0 5px 2px $primaryColor;
@@ -286,6 +287,7 @@ body {
             box-shadow: 0 0 4px 0.5px $primaryColor;
             object-fit: cover;
             box-shadow: 0 0 5px 2px $primaryDarkerColor;
+            animation: popup 0.3s ease;
 
             &:hover {
               box-shadow: 0 0 5px 2px $primaryColor;
@@ -305,7 +307,7 @@ body {
               display: flex;
               flex-direction: column;
               width: 100%;
-              height: 10rem;
+              height: 9rem;
 
               .header {
                 display: flex;
@@ -321,7 +323,7 @@ body {
                 }
 
                 .title {
-                  font-size: 1.3rem;
+                  font-size: 1.2rem;
                 }
               }
 
@@ -360,6 +362,7 @@ body {
           cursor: pointer;
           object-fit: cover;
           box-shadow: 0 0 5px 2px $primaryDarkerColor;
+          animation: popup 0.3s ease;
 
           &:hover {
             box-shadow: 0 0 5px 2px $primaryColor;
@@ -408,6 +411,7 @@ body {
       border-radius: 0.5rem;
       border: 2px solid #ffffff5d;
       position: relative;
+      animation: popup 0.3s ease-in;
 
       .close {
         position: absolute;
@@ -432,6 +436,7 @@ body {
         overflow: auto;
         position: relative;
         gap: 2rem;
+        transition: height 0.3s ease-in-out;
 
         .movie-details-header {
           .movie-title {
@@ -546,6 +551,7 @@ body {
           float: right !important;
           font-size: 1rem;
           padding: 0.4rem 2rem;
+          animation: popup 0.3s ease-in;
         }
       }
     }
@@ -571,7 +577,8 @@ body {
     flex-direction: column;
     box-shadow: 0 0 5px 1px $secondaryDarkColor;
     border-radius: 1rem;
-    background: rgba(38, 12, 12, 0.528);
+    background: rgba(25, 6, 6, 0.918);
+    animation: popup 0.3s ease-in;
 
     .confirmation-title {
       border-radius: 1rem 1rem 0 0;
@@ -611,8 +618,21 @@ body {
         padding: 0.5rem 2rem;
         font-size: 1rem;
         font-weight: 600;
+        opacity: 0.8;
       }
     }
+  }
+}
+
+@keyframes popup {
+  0% {
+    opacity: 0;
+    transform: translateY(-1rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0);
   }
 }
 
@@ -708,7 +728,6 @@ body {
         flex-direction: column;
         width: 95%;
         max-width: 22rem;
-        min-height: 78%;
 
         .movie-poster {
           width: 100%;

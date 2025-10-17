@@ -16,7 +16,7 @@ const KEY = "40bcec08";
 
 const initialMovies = [
   "wednesday",
-  "marvel",
+  "avengers",
   "brooklyn",
   "red notice",
   "resident alien",
@@ -26,7 +26,7 @@ const initialMovies = [
   "jurassic world",
   "serendipity",
   "inception",
-  "die hard",
+  "KPop",
 ];
 
 // const mostPopularMovies = {
