@@ -707,6 +707,8 @@ body {
         height: fit-content;
         flex-direction: column;
         width: 95%;
+        max-width: 22rem;
+        min-height: 78%;
 
         .movie-poster {
           width: 100%;
@@ -726,6 +728,7 @@ body {
           overflow: auto;
           justify-content: space-between;
           gap: 1rem;
+          flex: 1;
 
           .movie-details-header {
             .movie-title {
@@ -751,6 +754,28 @@ body {
 
         .feedback-wrapper {
           flex: 1;
+
+          .feedback {
+            gap: 0.9rem;
+            .your-rating {
+              p {
+                font-size: 1.2rem;
+              }
+              .star-rating {
+                height: 1.5rem;
+                svg {
+                  max-width: 2rem !important;
+                  max-height: 2rem !important;
+                }
+              }
+            }
+          }
+
+          .your-comment {
+            p {
+              font-size: 1.2rem !important;
+            }
+          }
         }
       }
     }

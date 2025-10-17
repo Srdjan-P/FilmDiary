@@ -173,7 +173,6 @@ export default function MovieCard({
                 <span>{movieDetails?.Runtime}</span>
               </div>
             </div>
-            <div className="description">{movieDetails?.Plot}</div>
             {watchedBox ? (
               <Feedback
                 onAddToWatched={handleAddToWatchedList}
@@ -184,6 +183,7 @@ export default function MovieCard({
               />
             ) : (
               <>
+                <div className="description">{movieDetails?.Plot}</div>
                 <div className="elements">
                   <div className="row">
                     <span className="type">Country:</span>

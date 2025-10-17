@@ -18,6 +18,7 @@ export default function Feedback({
             size={40}
             onSetRating={setUserRating}
             defaultRating={0}
+            className="star-rating"
           />
         </div>
         <div className="your-comment">
