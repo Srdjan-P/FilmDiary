@@ -20,7 +20,7 @@ const initialMovies = [
   "brooklyn",
   "red notice",
   "resident alien",
-  "supernatural",
+  "interstellar",
   "lucifer",
   "lethal weapon",
   "jurassic world",
