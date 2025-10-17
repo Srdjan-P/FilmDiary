@@ -42,12 +42,18 @@ export default function App() {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [results, setResults] = useState("");
-  const [watched, setWatched] = useState([]);
+  const [watched, setWatched] = useState(() => {
+    const storedValue = localStorage.getItem("watched");
+    return storedValue ? JSON.parse(storedValue) : [];
+  });
   const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
   const [userRating, setUserRating] = useState(null);
   const [comment, setComment] = useState("");
-  const [watchList, setWatchList] = useState([]);
+  const [watchList, setWatchList] = useState(() => {
+    const storedValue = localStorage.getItem("watchList");
+    return storedValue ? JSON.parse(storedValue) : [];
+  });
   const [confirmation, setConfirmation] = useState(false);
 
   function handleSelectMovie(movie) {
@@ -88,6 +94,14 @@ export default function App() {
       return setWatched([]);
     }
   }
+
+  useEffect(() => {
+    localStorage.setItem("watchList", JSON.stringify(watchList));
+  }, [watchList]);
+
+  useEffect(() => {
+    localStorage.setItem("watched", JSON.stringify(watched));
+  }, [watched]);
 
   useEffect(() => {
     if (location.pathname === "/" && !query) {
