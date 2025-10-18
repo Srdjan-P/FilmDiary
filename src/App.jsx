@@ -15,18 +15,18 @@ import ClearList from "./components/ClearList";
 const KEY = "40bcec08";
 
 const initialMovies = [
-  "wednesday",
-  "avengers",
-  "brooklyn",
-  "red notice",
-  "resident alien",
-  "interstellar",
-  "lucifer",
-  "lethal weapon",
-  "jurassic world",
-  "serendipity",
-  "inception",
-  "KPop",
+  "tt13443470",
+  "tt0848228",
+  "tt2467372",
+  "tt7991608",
+  "tt8690918",
+  "tt14205554",
+  "tt1375666",
+  "tt0240890",
+  "tt4052886",
+  "tt4881806",
+  "tt0816692",
+  "tt9813792",
 ];
 
 export default function App() {
@@ -104,12 +104,12 @@ export default function App() {
           let allMovies = [];
 
           for (const term of initialMovies) {
-            const url = `https://www.omdbapi.com/?apikey=${KEY}&s=${term}`;
+            const url = `https://www.omdbapi.com/?apikey=${KEY}&i=${term}`;
             const res = await fetch(url);
             const data = await res.json();
 
-            if (data.Search) {
-              allMovies = [...allMovies, ...data.Search.slice(0, 1)];
+            if (data.Response !== "False") {
+              allMovies.push(data);
             }
           }
           const shuffled = allMovies.sort(() => 0.5 - Math.random());
