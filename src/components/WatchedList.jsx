@@ -18,7 +18,9 @@ export default function WatchedList({
       ) : (
         <>
           <SearchResults>
-            You have {watched.length} titles on your list
+            <span className="text">
+              You have {watched.length} titles on your list
+            </span>
             {watched.length > 0 && (
               <Button onClick={() => setConfirmation(true)}>CLEAR LIST</Button>
             )}

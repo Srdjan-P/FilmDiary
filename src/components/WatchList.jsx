@@ -18,7 +18,9 @@ export default function WatchList({
       ) : (
         <>
           <SearchResults>
-            You have {watchList.length} titles on your list
+            <span className="text">
+              You have {watchList.length} titles on your list
+            </span>
             {watchList.length > 0 && (
               <Button onClick={() => setConfirmation(true)}>CLEAR LIST</Button>
             )}
