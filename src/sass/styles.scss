@@ -1,123 +1,18 @@
 @use "reset";
 @use "sass:color";
-
-$primaryColor: rgb(67, 97, 238);
-$secondaryColor: red;
-$primaryLightColor: color.adjust($primaryColor, $lightness: 5%);
-$primaryDarkColor: color.adjust($primaryColor, $lightness: -10%);
-$primaryDarkerColor: color.adjust($primaryColor, $lightness: -45%);
-$primaryDarkestColor: color.adjust($primaryColor, $lightness: -55%);
-$secondaryDarkColor: color.adjust($secondaryColor, $lightness: -10%);
-$secondaryDarkerColor: color.adjust($secondaryColor, $lightness: -30%);
-
-@mixin grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
-  justify-content: center;
-  gap: 0.8rem;
-  width: 100%;
-}
-
-@mixin excellent {
-  background-color: black;
-  &:hover {
-    box-shadow: 0 0 5px 1px gold;
-  }
-
-  .details {
-    .header {
-      background: linear-gradient(90deg, gold, black, gold);
-      background-size: 400% 100%;
-      font-weight: bold;
-      animation: goldBanner 20s linear infinite;
-
-      .title {
-        color: gold;
-        text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,
-          2px 2px 0 #000, 0px -2px 0 #000, 0px 2px 0 #000, -2px 0px 0 #000,
-          2px 0px 0 #000;
-      }
-      .rating-number {
-        text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,
-          2px 2px 0 #000, 0px -2px 0 #000, 0px 2px 0 #000, -2px 0px 0 #000,
-          2px 0px 0 #000;
-      }
-    }
-  }
-}
-
-@keyframes goldBanner {
-  0% {
-    background-position: 0% 0%;
-  }
-
-  100% {
-    background-position: 400% 0%;
-  }
-}
-
-@mixin good {
-  background-color: black;
-  &:hover {
-    box-shadow: 0 0 5px 1px darkgreen;
-  }
-
-  .details {
-    .header {
-      background: linear-gradient(90deg, darkgreen, black, darkgreen);
-      background-size: 400% 100%;
-      font-weight: bold;
-      animation: goldBanner 20s linear infinite;
-
-      .title {
-        text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,
-          2px 2px 0 #000, 0px -2px 0 #000, 0px 2px 0 #000, -2px 0px 0 #000,
-          2px 0px 0 #000;
-      }
-
-      .rating-number {
-        text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,
-          2px 2px 0 #000, 0px -2px 0 #000, 0px 2px 0 #000, -2px 0px 0 #000,
-          2px 0px 0 #000;
-      }
-    }
-  }
-}
-
-@mixin bad {
-  background-color: black;
-  &:hover {
-    box-shadow: 0 0 5px 1px darkred;
-  }
-
-  .details {
-    .header {
-      background: linear-gradient(90deg, darkred, black, darkred);
-      background-size: 400% 100%;
-      font-weight: bold;
-      animation: goldBanner 20s linear infinite;
-
-      .title {
-        text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,
-          2px 2px 0 #000, 0px -2px 0 #000, 0px 2px 0 #000, -2px 0px 0 #000,
-          2px 0px 0 #000;
-      }
-
-      .rating-number {
-        text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,
-          2px 2px 0 #000, 0px -2px 0 #000, 0px 2px 0 #000, -2px 0px 0 #000,
-          2px 0px 0 #000;
-      }
-    }
-  }
-}
+@use "variables";
+@use "mixins";
 
 * {
   box-sizing: border-box;
 }
 
 .btn {
-  background: linear-gradient(90deg, $primaryColor, $primaryDarkColor);
+  background: linear-gradient(
+    90deg,
+    variables.$primaryColor,
+    variables.$primaryDarkColor
+  );
   width: fit-content;
   color: #fff;
   cursor: pointer;
@@ -131,15 +26,19 @@ $secondaryDarkerColor: color.adjust($secondaryColor, $lightness: -30%);
   border: none;
 
   &.delete-btn {
-    background: $secondaryColor;
+    background: variables.$secondaryColor;
 
     &:hover {
-      background: $secondaryDarkerColor;
+      background: variables.$secondaryDarkerColor;
     }
   }
 
   &:hover {
-    background: linear-gradient(90deg, $primaryDarkColor, $primaryDarkerColor);
+    background: linear-gradient(
+      90deg,
+      variables.$primaryDarkColor,
+      variables.$primaryDarkerColor
+    );
   }
 
   &:active {
@@ -173,7 +72,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   height: 100%;
   width: 100%;
-  background-color: $primaryDarkestColor;
+  background-color: variables.$primaryDarkestColor;
   color: #fff;
 
   header {
@@ -182,7 +81,11 @@ body {
     justify-content: space-between;
     gap: 2rem;
     padding: 1.5rem 2rem 3rem 2rem;
-    background: linear-gradient(180deg, $primaryColor, $primaryDarkestColor);
+    background: linear-gradient(
+      180deg,
+      variables.$primaryColor,
+      variables.$primaryDarkestColor
+    );
 
     .logo {
       color: #fff;
@@ -230,7 +133,11 @@ body {
 
         &:disabled {
           color: #fff;
-          background-color: color.adjust($primaryColor, $lightness: -35%), 0.6;
+          background-color: color.adjust(
+              variables.$primaryColor,
+              $lightness: -35%
+            ),
+            0.6;
 
           &:hover {
             background-color: rgba(128, 128, 128, 0.315);
@@ -269,7 +176,7 @@ body {
         width: 100%;
 
         a {
-          background-color: $primaryDarkestColor;
+          background-color: variables.$primaryDarkestColor;
           width: 100%;
           padding: 1rem;
           border-radius: 0.5rem;
@@ -277,8 +184,8 @@ body {
           color: #fff;
           font-weight: 600;
           text-align: center;
-          border-bottom: 1px solid $primaryColor;
-          border-top: 1px solid $primaryColor;
+          border-bottom: 1px solid variables.$primaryColor;
+          border-top: 1px solid variables.$primaryColor;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -286,22 +193,22 @@ body {
           &.active {
             background: linear-gradient(
               90deg,
-              $primaryDarkestColor,
-              $primaryColor,
-              $primaryDarkestColor
+              variables.$primaryDarkestColor,
+              variables.$primaryColor,
+              variables.$primaryDarkestColor
             );
             &:hover {
               background: linear-gradient(
                 90deg,
-                $primaryDarkestColor,
-                $primaryColor,
-                $primaryDarkestColor
+                variables.$primaryDarkestColor,
+                variables.$primaryColor,
+                variables.$primaryDarkestColor
               );
             }
           }
 
           &:hover {
-            background: $primaryDarkerColor;
+            background: variables.$primaryDarkerColor;
           }
         }
       }
@@ -313,33 +220,33 @@ body {
         align-items: center;
         line-height: 3rem;
         font-size: 1.5rem;
-        border-bottom: 1px solid $primaryColor;
+        border-bottom: 1px solid variables.$primaryColor;
 
         .btn {
-          background: $secondaryColor;
+          background: variables.$secondaryColor;
           height: 2rem;
           font-weight: 600;
           font-size: 0.8rem;
           padding: 0.5rem;
 
           &:hover {
-            background: $secondaryDarkerColor;
+            background: variables.$secondaryDarkerColor;
           }
         }
       }
 
       .movie-list {
-        @include grid;
+        @include mixins.grid;
         .movie {
           overflow: hidden;
           position: relative;
           border-radius: 0.7rem;
           cursor: pointer;
-          box-shadow: 0 0 5px 2px $primaryDarkerColor;
+          box-shadow: 0 0 5px 2px variables.$primaryDarkerColor;
           animation: popup 0.3s ease;
 
           &:hover {
-            box-shadow: 0 0 5px 2px $primaryColor;
+            box-shadow: 0 0 5px 2px variables.$primaryColor;
           }
 
           img {
@@ -379,7 +286,7 @@ body {
             flex-direction: column;
             background-color: rgba(56, 56, 56, 0.301);
             object-fit: cover;
-            box-shadow: 0 0 5px 1px $primaryDarkerColor;
+            box-shadow: 0 0 5px 1px variables.$primaryDarkerColor;
             animation: popup 0.3s ease;
             position: relative;
 
@@ -397,7 +304,7 @@ body {
             }
 
             &:hover {
-              box-shadow: 0 0 5px 2px $primaryColor;
+              box-shadow: 0 0 5px 2px variables.$primaryColor;
             }
 
             .movie-poster {
@@ -422,7 +329,7 @@ body {
                 height: 5rem;
                 width: 100%;
                 align-items: center;
-                background-color: $primaryDarkestColor;
+                background-color: variables.$primaryDarkestColor;
                 padding: 0.5rem 1rem;
 
                 .rating {
@@ -458,22 +365,22 @@ body {
             }
 
             &.excellent {
-              @include excellent;
+              @include mixins.excellent;
             }
 
             &.good {
-              @include good;
+              @include mixins.good;
             }
 
             &.bad {
-              @include bad;
+              @include mixins.bad;
             }
           }
         }
       }
 
       .watch-list {
-        @include grid;
+        @include mixins.grid;
 
         .movie {
           overflow: hidden;
@@ -481,11 +388,11 @@ body {
           border-radius: 0.7rem;
           cursor: pointer;
           object-fit: cover;
-          box-shadow: 0 0 5px 2px $primaryDarkerColor;
+          box-shadow: 0 0 5px 2px variables.$primaryDarkerColor;
           animation: popup 0.3s ease;
 
           &:hover {
-            box-shadow: 0 0 5px 2px $primaryColor;
+            box-shadow: 0 0 5px 2px variables.$primaryColor;
           }
 
           img {
@@ -572,7 +479,6 @@ body {
         gap: 2rem;
         transition: height 0.3s ease-in-out;
         background: rgba(0, 0, 0, 0.543);
-        border-radius: 1rem;
 
         .movie-details-header {
           .movie-title {
@@ -711,7 +617,7 @@ body {
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
-    box-shadow: 0 0 5px 1px $secondaryDarkColor;
+    box-shadow: 0 0 5px 1px variables.$secondaryDarkColor;
     border-radius: 1rem;
     background: rgba(25, 6, 6, 0.918);
     animation: popup 0.3s ease-in;
@@ -724,7 +630,7 @@ body {
       display: flex;
       align-items: center;
       justify-content: center;
-      border-bottom: 2px solid $secondaryDarkerColor;
+      border-bottom: 2px solid variables.$secondaryDarkerColor;
       font-size: 1.4rem;
       font-weight: 600;
       background: #00000059;
@@ -747,14 +653,13 @@ body {
       justify-content: space-between;
       padding: 1rem 2rem;
       border-radius: 0 0 1rem 1rem;
-      border-top: 2px solid $secondaryDarkerColor;
+      border-top: 2px solid variables.$secondaryDarkerColor;
       background: #00000059;
 
       .btn {
         padding: 0.5rem 2rem;
         font-size: 1rem;
         font-weight: 600;
-        opacity: 0.8;
       }
     }
   }
@@ -852,7 +757,7 @@ body {
           border: none;
 
           .text {
-            border-bottom: 1px solid $primaryColor;
+            border-bottom: 1px solid variables.$primaryColor;
           }
 
           .btn {
@@ -907,6 +812,7 @@ body {
           flex: 1;
           box-shadow: inset 0 30px 20px -10px rgb(0, 0, 0);
           background: rgba(0, 0, 0, 0.5);
+          border-radius: 0;
 
           .movie-details-header {
             .movie-title {

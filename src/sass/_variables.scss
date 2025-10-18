@@ -1,0 +1,10 @@
+@use "sass:color";
+
+$primaryColor: rgb(67, 97, 238);
+$secondaryColor: red;
+$primaryLightColor: color.adjust($primaryColor, $lightness: 5%);
+$primaryDarkColor: color.adjust($primaryColor, $lightness: -10%);
+$primaryDarkerColor: color.adjust($primaryColor, $lightness: -45%);
+$primaryDarkestColor: color.adjust($primaryColor, $lightness: -55%);
+$secondaryDarkColor: color.adjust($secondaryColor, $lightness: -10%);
+$secondaryDarkerColor: color.adjust($secondaryColor, $lightness: -30%);
