@@ -18,6 +18,100 @@ $secondaryDarkerColor: color.adjust($secondaryColor, $lightness: -30%);
   width: 100%;
 }
 
+@mixin excellent {
+  background-color: black;
+  &:hover {
+    box-shadow: 0 0 5px 1px gold;
+  }
+
+  .details {
+    .header {
+      background: linear-gradient(90deg, gold, black, gold);
+      background-size: 400% 100%;
+      font-weight: bold;
+      animation: goldBanner 20s linear infinite;
+
+      .title {
+        color: gold;
+        text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,
+          2px 2px 0 #000, 0px -2px 0 #000, 0px 2px 0 #000, -2px 0px 0 #000,
+          2px 0px 0 #000;
+      }
+      .rating-number {
+        text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,
+          2px 2px 0 #000, 0px -2px 0 #000, 0px 2px 0 #000, -2px 0px 0 #000,
+          2px 0px 0 #000;
+      }
+    }
+  }
+}
+
+@keyframes goldBanner {
+  0% {
+    background-position: 0% 0%;
+  }
+
+  100% {
+    background-position: 400% 0%;
+  }
+}
+
+@mixin good {
+  background-color: black;
+  &:hover {
+    box-shadow: 0 0 5px 1px darkgreen;
+  }
+
+  .details {
+    .header {
+      background: linear-gradient(90deg, darkgreen, black, darkgreen);
+      background-size: 400% 100%;
+      font-weight: bold;
+      animation: goldBanner 20s linear infinite;
+
+      .title {
+        text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,
+          2px 2px 0 #000, 0px -2px 0 #000, 0px 2px 0 #000, -2px 0px 0 #000,
+          2px 0px 0 #000;
+      }
+
+      .rating-number {
+        text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,
+          2px 2px 0 #000, 0px -2px 0 #000, 0px 2px 0 #000, -2px 0px 0 #000,
+          2px 0px 0 #000;
+      }
+    }
+  }
+}
+
+@mixin bad {
+  background-color: black;
+  &:hover {
+    box-shadow: 0 0 5px 1px darkred;
+  }
+
+  .details {
+    .header {
+      background: linear-gradient(90deg, darkred, black, darkred);
+      background-size: 400% 100%;
+      font-weight: bold;
+      animation: goldBanner 20s linear infinite;
+
+      .title {
+        text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,
+          2px 2px 0 #000, 0px -2px 0 #000, 0px 2px 0 #000, -2px 0px 0 #000,
+          2px 0px 0 #000;
+      }
+
+      .rating-number {
+        text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,
+          2px 2px 0 #000, 0px -2px 0 #000, 0px 2px 0 #000, -2px 0px 0 #000,
+          2px 0px 0 #000;
+      }
+    }
+  }
+}
+
 * {
   box-sizing: border-box;
 }
@@ -284,9 +378,8 @@ body {
             display: flex;
             flex-direction: column;
             background-color: rgba(56, 56, 56, 0.301);
-            box-shadow: 0 0 4px 0.5px $primaryColor;
             object-fit: cover;
-            box-shadow: 0 0 5px 2px $primaryDarkerColor;
+            box-shadow: 0 0 5px 1px $primaryDarkerColor;
             animation: popup 0.3s ease;
             position: relative;
 
@@ -326,13 +419,13 @@ body {
               .header {
                 display: flex;
                 justify-content: space-between;
+                height: 5rem;
                 width: 100%;
                 align-items: center;
                 background-color: $primaryDarkestColor;
                 padding: 0.5rem 1rem;
-                box-shadow: 0 0 10px 1px $primaryDarkColor;
 
-                .star {
+                .rating {
                   font-size: 1.2rem;
                 }
 
@@ -363,9 +456,22 @@ body {
             img {
               width: 10rem;
             }
+
+            &.excellent {
+              @include excellent;
+            }
+
+            &.good {
+              @include good;
+            }
+
+            &.bad {
+              @include bad;
+            }
           }
         }
       }
+
       .watch-list {
         @include grid;
 
@@ -588,14 +694,15 @@ body {
 }
 
 .clear-list {
-  position: absolute;
+  position: fixed;
   display: flex;
   justify-content: center;
   align-items: center;
   top: 0;
-  height: 100%;
+  min-height: 100%;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.57);
+  z-index: 1001;
 
   .clear-list-window {
     width: 20rem;
