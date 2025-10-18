@@ -5,7 +5,7 @@ export default function Search({ query, setQuery, disabled }) {
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        placeholder="Search for movies.."
+        placeholder="Search titles..."
         disabled={disabled}
       />
     </div>

@@ -174,7 +174,7 @@ export default function App() {
       </Header>
       <Main>
         <Navigation>
-          <NavLink to="/">Search Movies</NavLink>
+          <NavLink to="/">Search</NavLink>
           <NavLink to="/watch">Watch List</NavLink>
           <NavLink to="/watched">Watched List</NavLink>
         </Navigation>
