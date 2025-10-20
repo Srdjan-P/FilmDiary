@@ -8,7 +8,19 @@ export default function WatchList({
   onSelectMovie,
   isLoading,
   setConfirmation,
+  localQuery,
 }) {
+  const filteredData = watchList.filter((item) => {
+    if (!localQuery || localQuery === "") {
+      return item;
+    } else {
+      const searchTerm = localQuery?.toLowerCase();
+      const title = item.title || item.Title || "";
+
+      return title?.toLowerCase().includes(searchTerm);
+    }
+  });
+
   return (
     <>
       {isLoading ? (
@@ -26,7 +38,7 @@ export default function WatchList({
             )}
           </SearchResults>
           <ul className="watch-list">
-            {watchList?.map((movie) => (
+            {filteredData?.map((movie) => (
               <WatchMovie
                 movie={movie}
                 key={movie.imdbID}

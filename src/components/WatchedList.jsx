@@ -8,7 +8,20 @@ export default function WatchedList({
   isLoading,
   setConfirmation,
   onRemoveMovie,
+  localQuery,
 }) {
+  const filteredData = watched.filter((item) => {
+    if (!localQuery || localQuery === "") {
+      return item;
+    } else {
+      const searchTerm = localQuery?.toLowerCase();
+      const title = item.title || item.Title || "";
+
+      return title?.toLowerCase().includes(searchTerm);
+    }
+  });
+  console.log(localQuery);
+
   return (
     <>
       {isLoading ? (
@@ -27,7 +40,7 @@ export default function WatchedList({
           </SearchResults>
           <div className="watched-list">
             <ul>
-              {watched.map((movie) => (
+              {filteredData.map((movie) => (
                 <WatchedMovie
                   movie={movie}
                   key={movie.imdbID}

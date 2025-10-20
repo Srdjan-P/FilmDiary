@@ -47,6 +47,7 @@ export default function App() {
     return storedValue ? JSON.parse(storedValue) : [];
   });
   const [confirmation, setConfirmation] = useState(false);
+  const [localQuery, setLocalQuery] = useState("");
 
   function handleSelectMovie(movie) {
     setSelectedMovie(movie);
@@ -97,7 +98,7 @@ export default function App() {
   }, [watched]);
 
   useEffect(() => {
-    if (location.pathname === "/" && !query) {
+    if (location.pathname === "/" && !query && movies.length === 0) {
       async function fetchInitialMovies() {
         setIsLoading(true);
         try {
@@ -123,15 +124,21 @@ export default function App() {
 
       fetchInitialMovies();
     }
-  }, [location.pathname, query]);
+  }, [location.pathname, query, movies.length]);
 
   useEffect(() => {
-    if (!query.trim()) {
-      if (location.pathname === "/") {
-        return;
-      }
+    if (location.pathname !== "/") {
+      setLocalQuery("");
       setMovies([]);
       return;
+    }
+
+    if (!query.trim()) {
+      if (location.pathname === "/") {
+        setMovies([]);
+        setResults("");
+        return;
+      }
     }
 
     const timer = setTimeout(async function fetchMovies() {
@@ -166,11 +173,19 @@ export default function App() {
         <NavLink to="/" onClick={() => setQuery("")}>
           <Logo />
         </NavLink>
-        <Search
-          query={query}
-          setQuery={setQuery}
-          disabled={location.pathname !== "/"}
-        />
+        {location.pathname === "/" ? (
+          <Search
+            query={query}
+            setQuery={setQuery}
+            placeholder="Search titles..."
+          />
+        ) : (
+          <Search
+            localQuery={localQuery}
+            setLocalQuery={setLocalQuery}
+            placeholder={`Search your ${location.pathname.slice(1)} list...`}
+          />
+        )}
       </Header>
       <Main>
         <Navigation>
@@ -202,6 +217,7 @@ export default function App() {
                 onSelectMovie={handleSelectMovie}
                 isLoading={isLoading}
                 setConfirmation={setConfirmation}
+                localQuery={localQuery}
               />
             }
           />
@@ -214,6 +230,7 @@ export default function App() {
                 isLoading={isLoading}
                 setWatched={setWatched}
                 onRemoveMovie={handleRemoveFromWatched}
+                localQuery={localQuery}
               />
             }
           />
