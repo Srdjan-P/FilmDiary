@@ -20,7 +20,6 @@ export default function WatchedList({
       return title?.toLowerCase().includes(searchTerm);
     }
   });
-  console.log(localQuery);
 
   return (
     <>

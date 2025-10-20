@@ -330,11 +330,11 @@ body {
               .header {
                 display: flex;
                 justify-content: space-between;
-                height: 5rem;
+                height: fit-content;
                 width: 100%;
                 align-items: center;
                 background-color: variables.$primaryDarkestColor;
-                padding: 0.5rem 1rem;
+                padding: 0.7rem;
 
                 .rating {
                   font-size: 1.2rem;
@@ -864,6 +864,11 @@ body {
           .your-comment {
             p {
               font-size: 1.2rem !important;
+            }
+            textarea {
+              &::placeholder {
+                font-size: 1rem;
+              }
             }
           }
         }
