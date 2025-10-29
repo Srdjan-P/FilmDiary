@@ -11,6 +11,7 @@ import { Routes, Route, NavLink, useLocation } from "react-router";
 import WatchList from "./components/WatchList";
 import WatchedList from "./components/WatchedList";
 import ClearList from "./components/ClearList";
+import NoResults from "./components/NoResults";
 
 const KEY = "40bcec08";
 
@@ -200,6 +201,12 @@ export default function App() {
               <>
                 {query && results > 0 && (
                   <SearchResults>Search results for "{query}"</SearchResults>
+                )}
+                {query && !isLoading && results === 0 && (
+                  <NoResults
+                    message={`No results found for "${query}"`}
+                    subMessage={"Try searching for a different title."}
+                  />
                 )}
                 <MovieList
                   movies={movies}

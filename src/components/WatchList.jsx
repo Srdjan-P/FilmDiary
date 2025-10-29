@@ -2,6 +2,7 @@ import Loader from "./Loader";
 import SearchResults from "./SearchResults";
 import WatchMovie from "./WatchMovie";
 import Button from "./Button";
+import NoResults from "./NoResults";
 
 export default function WatchList({
   watchList,
@@ -47,6 +48,18 @@ export default function WatchList({
             ))}
           </ul>
         </>
+      )}
+      {watchList.length === 0 && !localQuery && (
+        <NoResults
+          message={"Your Watch List is empty."}
+          subMessage={"Start adding some movies!"}
+        />
+      )}
+
+      {localQuery && filteredData.length === 0 && (
+        <NoResults
+          message={`No results found in your Watch List for "${localQuery}"`}
+        />
       )}
     </>
   );

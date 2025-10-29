@@ -1,5 +1,6 @@
 import Button from "./Button";
 import Loader from "./Loader";
+import NoResults from "./NoResults";
 import SearchResults from "./SearchResults";
 import WatchedMovie from "./WatchedMovie";
 
@@ -49,6 +50,18 @@ export default function WatchedList({
             </ul>
           </div>
         </>
+      )}
+      {watched.length === 0 && !localQuery && (
+        <NoResults
+          message={"Your Watched List is empty."}
+          subMessage={"Start watching some movies!"}
+        />
+      )}
+
+      {localQuery && filteredData.length === 0 && (
+        <NoResults
+          message={`No results found in your Watched List for "${localQuery}"`}
+        />
       )}
     </>
   );
