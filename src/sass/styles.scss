@@ -244,9 +244,8 @@ body {
         .movie {
           overflow: hidden;
           position: relative;
-          border-radius: 0.7rem;
           cursor: pointer;
-          box-shadow: 0 0 5px 2px variables.$primaryDarkerColor;
+          border: 1px solid rgba(255, 255, 255, 0.199);
           animation: popup 0.3s ease;
 
           &:hover {
@@ -292,6 +291,7 @@ body {
             object-fit: cover;
             animation: popup 0.3s ease;
             position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.199);
 
             .delete-btn {
               position: absolute;
@@ -388,11 +388,10 @@ body {
         .movie {
           overflow: hidden;
           position: relative;
-          border-radius: 0.7rem;
           cursor: pointer;
           object-fit: cover;
-          box-shadow: 0 0 5px 2px variables.$primaryDarkerColor;
           animation: popup 0.3s ease;
+          border: 1px solid rgba(255, 255, 255, 0.199);
 
           &:hover {
             box-shadow: 0 0 5px 2px variables.$primaryColor;
