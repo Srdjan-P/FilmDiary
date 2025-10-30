@@ -8,94 +8,160 @@
 
 @mixin excellent {
   background-color: black;
+  border: 1px solid rgba(255, 217, 0, 0.5);
+
   &:hover {
     box-shadow: 0 0 5px 1px gold;
   }
 
   .details {
     .header {
-      background: linear-gradient(90deg, gold, black, gold);
-      background-size: 400% 100%;
-      font-weight: bold;
-      animation: goldBanner 20s linear infinite;
+      background-color: black;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 217, 0, 0.7);
 
-      .title {
-        color: gold;
-        text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,
-          2px 2px 0 #000, 0px -2px 0 #000, 0px 2px 0 #000, -2px 0px 0 #000,
-          2px 0px 0 #000;
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        border: 2px solid transparent;
+        background: linear-gradient(
+            90deg,
+            transparent 30%,
+            gold 50%,
+            transparent 70%
+          )
+          border-box;
+        background-size: 300% 100%;
+        animation: frameAnimation 10s linear infinite;
+        mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+        mask-composite: exclude;
+        -webkit-mask: linear-gradient(#fff 0 0) padding-box,
+          linear-gradient(#fff 0 0);
+        -webkit-mask-composite: destination-out;
       }
+
+      .title,
       .rating-number {
-        text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,
-          2px 2px 0 #000, 0px -2px 0 #000, 0px 2px 0 #000, -2px 0px 0 #000,
-          2px 0px 0 #000;
+        color: gold;
       }
     }
-  }
-}
-
-@keyframes goldBanner {
-  0% {
-    background-position: 0% 0%;
-  }
-
-  100% {
-    background-position: 400% 0%;
+    .comment {
+      color: gold;
+    }
   }
 }
 
 @mixin good {
   background-color: black;
+  border: 1px solid rgba(81, 255, 81, 0.5);
+
   &:hover {
-    box-shadow: 0 0 5px 1px darkgreen;
+    box-shadow: 0 0 5px 2px green;
   }
 
   .details {
     .header {
-      background: linear-gradient(90deg, darkgreen, black, darkgreen);
-      background-size: 400% 100%;
-      font-weight: bold;
-      animation: goldBanner 20s linear infinite;
+      background-color: black;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgb(81, 255, 81);
 
-      .title {
-        text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,
-          2px 2px 0 #000, 0px -2px 0 #000, 0px 2px 0 #000, -2px 0px 0 #000,
-          2px 0px 0 #000;
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        border: 2px solid transparent;
+        background: linear-gradient(
+            90deg,
+            transparent 30%,
+            rgb(1, 178, 1) 50%,
+            transparent 70%
+          )
+          border-box;
+        background-size: 300% 100%;
+        animation: frameAnimation 10s linear infinite;
+        mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+        mask-composite: exclude;
+        -webkit-mask: linear-gradient(#fff 0 0) padding-box,
+          linear-gradient(#fff 0 0);
+        -webkit-mask-composite: destination-out;
       }
 
+      .title,
       .rating-number {
-        text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,
-          2px 2px 0 #000, 0px -2px 0 #000, 0px 2px 0 #000, -2px 0px 0 #000,
-          2px 0px 0 #000;
+        color: rgb(81, 255, 81);
       }
+    }
+    .comment {
+      color: rgb(81, 255, 81);
     }
   }
 }
 
 @mixin bad {
   background-color: black;
+  border: 1px solid rgba(139, 0, 0, 0.5);
+
   &:hover {
     box-shadow: 0 0 5px 1px darkred;
   }
 
   .details {
     .header {
-      background: linear-gradient(90deg, darkred, black, darkred);
-      background-size: 400% 100%;
-      font-weight: bold;
-      animation: goldBanner 20s linear infinite;
+      background-color: black;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(139, 0, 0, 0.5);
 
-      .title {
-        text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,
-          2px 2px 0 #000, 0px -2px 0 #000, 0px 2px 0 #000, -2px 0px 0 #000,
-          2px 0px 0 #000;
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        border: 2px solid transparent;
+        background: linear-gradient(
+            90deg,
+            transparent 30%,
+            red 50%,
+            transparent 70%
+          )
+          border-box;
+        background-size: 300% 100%;
+        animation: frameAnimation 10s linear infinite;
+        mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+        mask-composite: exclude;
+        -webkit-mask: linear-gradient(#fff 0 0) padding-box,
+          linear-gradient(#fff 0 0);
+        -webkit-mask-composite: destination-out;
       }
 
+      .title,
       .rating-number {
-        text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,
-          2px 2px 0 #000, 0px -2px 0 #000, 0px 2px 0 #000, -2px 0px 0 #000,
-          2px 0px 0 #000;
+        color: red;
       }
     }
+    .comment {
+      color: red;
+    }
+  }
+}
+
+@keyframes frameAnimation {
+  0% {
+    background-position: 0% 0%;
+  }
+
+  100% {
+    background-position: 400% 0%;
   }
 }

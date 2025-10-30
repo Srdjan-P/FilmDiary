@@ -290,7 +290,6 @@ body {
             flex-direction: column;
             background-color: rgba(56, 56, 56, 0.301);
             object-fit: cover;
-            box-shadow: 0 0 5px 1px variables.$primaryDarkerColor;
             animation: popup 0.3s ease;
             position: relative;
 
@@ -330,7 +329,7 @@ body {
               .header {
                 display: flex;
                 justify-content: space-between;
-                height: fit-content;
+                min-height: fit-content;
                 width: 100%;
                 align-items: center;
                 background-color: variables.$primaryDarkestColor;
@@ -733,14 +732,17 @@ body {
               }
 
               .details {
-                min-height: 8rem;
+                min-height: 7rem;
+                max-height: 8rem;
                 height: auto;
+                overflow: scroll;
+                flex: 1;
 
                 .header {
                   padding: 0.3rem 0.5rem;
 
                   .title {
-                    font-size: 1rem;
+                    font-size: 0.9rem;
                   }
 
                   .star {
