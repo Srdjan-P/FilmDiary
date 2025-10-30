@@ -49,7 +49,7 @@ export default function WatchList({
           </ul>
         </>
       )}
-      {watchList.length === 0 && !localQuery && (
+      {watchList.length === 0 && !localQuery && !isLoading && (
         <NoResults
           message={"Your Watch List is empty."}
           subMessage={"Start adding some movies!"}

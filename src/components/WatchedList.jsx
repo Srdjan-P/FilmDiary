@@ -51,7 +51,7 @@ export default function WatchedList({
           </div>
         </>
       )}
-      {watched.length === 0 && !localQuery && (
+      {watched.length === 0 && !localQuery && !isLoading && (
         <NoResults
           message={"Your Watched List is empty."}
           subMessage={"Start watching some movies!"}
