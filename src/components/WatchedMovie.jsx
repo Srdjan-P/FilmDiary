@@ -10,9 +10,9 @@ export default function WatchedMovie({ movie, onRemoveMovie }) {
   return (
     <>
       <li className={ratingClass()}>
-        <div className="delete-btn" onClick={() => onRemoveMovie(movie.imdbID)}>
+        {/* <div className="delete-btn" onClick={() => onRemoveMovie(movie.imdbID)}>
           ❌
-        </div>
+        </div> */}
         <div className="movie-poster">
           <img
             src={movie.poster}
@@ -31,9 +31,9 @@ export default function WatchedMovie({ movie, onRemoveMovie }) {
               <span className="rating-number">{movie.userRating}</span>
             </span>
           </div>
-          <div className="comment">
+          {/* <div className="comment">
             {movie.comment ? `"${movie.comment}"` : "No Comment"}
-          </div>
+          </div> */}
         </div>
       </li>
     </>
