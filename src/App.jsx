@@ -78,6 +78,7 @@ export default function App() {
 
   function handleRemoveFromWatched(id) {
     setWatched((watched) => watched.filter((movie) => movie.imdbID !== id));
+    setIsOpen(false);
   }
 
   function handleClearList() {
@@ -238,6 +239,7 @@ export default function App() {
                 setWatched={setWatched}
                 onRemoveMovie={handleRemoveFromWatched}
                 localQuery={localQuery}
+                onSelectMovie={handleSelectMovie}
               />
             }
           />
@@ -255,6 +257,7 @@ export default function App() {
           location={location}
           watchList={watchList}
           onRemoveMovie={handleRemoveMovie}
+          onRemoveWatchedMovie={handleRemoveFromWatched}
         />
       )}
       {confirmation && (

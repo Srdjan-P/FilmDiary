@@ -8,3 +8,4 @@ $primaryDarkerColor: color.adjust($primaryColor, $lightness: -45%);
 $primaryDarkestColor: color.adjust($primaryColor, $lightness: -55%);
 $secondaryDarkColor: color.adjust($secondaryColor, $lightness: -10%);
 $secondaryDarkerColor: color.adjust($secondaryColor, $lightness: -30%);
+$tertiaryColor: rgb(31, 136, 255);

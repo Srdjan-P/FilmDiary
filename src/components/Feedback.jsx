@@ -32,8 +32,12 @@ export default function Feedback({
           ></textarea>
         </div>
       </div>
-      <div className="float-right">
-        {userRating > 0 ? <Button onClick={onAddToWatched}>Add</Button> : null}
+      <div>
+        {userRating > 0 ? (
+          <Button className="add-btn" onClick={onAddToWatched}>
+            Add
+          </Button>
+        ) : null}
       </div>
     </div>
   );

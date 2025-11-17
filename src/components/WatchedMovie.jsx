@@ -1,6 +1,6 @@
 import noPoster from "../assets/no_poster.png";
 
-export default function WatchedMovie({ movie, onRemoveMovie }) {
+export default function WatchedMovie({ movie, onSelectMovie }) {
   const ratingClass = () => {
     if (movie.userRating === 5) return "excellent";
     if (movie.userRating >= 2) return "good";
@@ -9,10 +9,7 @@ export default function WatchedMovie({ movie, onRemoveMovie }) {
 
   return (
     <>
-      <li className={ratingClass()}>
-        {/* <div className="delete-btn" onClick={() => onRemoveMovie(movie.imdbID)}>
-          ❌
-        </div> */}
+      <li className={ratingClass()} onClick={() => onSelectMovie(movie)}>
         <div className="movie-poster">
           <img
             src={movie.poster}
@@ -31,9 +28,6 @@ export default function WatchedMovie({ movie, onRemoveMovie }) {
               <span className="rating-number">{movie.userRating}</span>
             </span>
           </div>
-          {/* <div className="comment">
-            {movie.comment ? `"${movie.comment}"` : "No Comment"}
-          </div> */}
         </div>
       </li>
     </>

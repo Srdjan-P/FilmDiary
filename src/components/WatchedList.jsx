@@ -10,6 +10,7 @@ export default function WatchedList({
   setConfirmation,
   onRemoveMovie,
   localQuery,
+  onSelectMovie,
 }) {
   const filteredData = watched.filter((item) => {
     if (!localQuery || localQuery === "") {
@@ -45,6 +46,7 @@ export default function WatchedList({
                   movie={movie}
                   key={movie.imdbID}
                   onRemoveMovie={onRemoveMovie}
+                  onSelectMovie={onSelectMovie}
                 />
               ))}
             </ul>

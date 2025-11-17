@@ -14,6 +14,7 @@ export default function MovieCard({
   location,
   watchList,
   onRemoveMovie,
+  onRemoveWatchedMovie,
 }) {
   const [movieDetails, setMovieDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -26,6 +27,8 @@ export default function MovieCard({
   const isMovieOnWatchList = watchList.some(
     (movie) => movie.imdbID === selectedMovie?.imdbID
   );
+
+  const isFromWatchedList = location.pathname === "/watched";
 
   useEffect(() => {
     setUserRating(null);
@@ -52,6 +55,18 @@ export default function MovieCard({
     fetchMovieDetails();
   }, [selectedMovie?.imdbID, KEY]);
 
+  useEffect(() => {
+    if (isFromWatchedList && selectedMovie) {
+      const watchedMovie = watched.find(
+        (movie) => movie.imdbID === selectedMovie.imdbID
+      );
+      if (watchedMovie) {
+        setUserRating(watchedMovie.userRating);
+        setComment(watchedMovie.comment || "");
+      }
+    }
+  }, [isFromWatchedList, selectedMovie, watched]);
+
   function handleAddToWatchedList() {
     if (!movieDetails) {
       console.error("No movie details available");
@@ -74,6 +89,29 @@ export default function MovieCard({
     onClose();
   }
 
+  function handleUpdateWatchedMovie() {
+    if (!movieDetails) {
+      console.error("No movie details available");
+      return;
+    }
+
+    const updatedMovie = {
+      imdbID: movieDetails.imdbID,
+      title: movieDetails.Title,
+      year: movieDetails.Year,
+      poster: movieDetails.Poster,
+      imdbRating: movieDetails.imdbRating,
+      runtime: movieDetails.Runtime,
+      userRating,
+      comment,
+      addedAt: selectedMovie.addedAt || new Date().toISOString(),
+    };
+
+    onRemoveWatchedMovie(selectedMovie.imdbID);
+    onWatchedMovie(updatedMovie);
+    onClose();
+  }
+
   function handleAddToWatchList() {
     if (!movieDetails) {
       console.error("No movie details available");
@@ -93,7 +131,7 @@ export default function MovieCard({
   }
 
   function renderButtons() {
-    if (location.pathname !== "/") {
+    if (location.pathname === "/watch") {
       return (
         <>
           <Button
@@ -136,6 +174,74 @@ export default function MovieCard({
     );
   }
 
+  const renderWatchedListContent = () => {
+    const watchedMovie = watched.find(
+      (movie) => movie.imdbID === selectedMovie.imdbID
+    );
+
+    return (
+      <div className="feedback-wrapper">
+        <div className="feedback">
+          <div className="your-rating">
+            <p>Your Rating</p>
+            <div className="rating-display">
+              <span className="star">⭐</span>
+              <span className="rating-number">
+                {watchedMovie?.userRating || "Not rated"}
+              </span>
+            </div>
+          </div>
+          <div className="your-comment">
+            <p>Your Comment</p>
+            <div className="comment-display">
+              {watchedMovie?.comment
+                ? `"${watchedMovie.comment}"`
+                : "No comment added"}
+            </div>
+          </div>
+        </div>
+        <div className="buttons">
+          <Button onClick={() => setWatchedBox(true)}>Edit 🖊</Button>
+          <Button
+            className="delete-btn"
+            onClick={() => onRemoveWatchedMovie(selectedMovie.imdbID)}
+          >
+            <span>-</span>Watched List
+          </Button>
+        </div>
+      </div>
+    );
+  };
+
+  const renderFullDetails = () => (
+    <>
+      <div className="description">{movieDetails?.Plot}</div>
+      <div className="elements">
+        <div className="row">
+          <span className="type">Country:</span>
+          <span className="data">{movieDetails?.Country}</span>
+        </div>
+        <div className="row">
+          <span className="type">Genre:</span>
+          <span className="data">{movieDetails?.Genre}</span>
+        </div>
+        <div className="row">
+          <span className="type">Released:</span>
+          <span className="data">{movieDetails?.Released}</span>
+        </div>
+        <div className="row">
+          <span className="type">Director:</span>
+          <span className="data">{movieDetails?.Director}</span>
+        </div>
+        <div className="row">
+          <span className="type">Casts:</span>
+          <span className="data">{movieDetails?.Actors}</span>
+        </div>
+      </div>
+      <div className="buttons">{renderButtons()}</div>
+    </>
+  );
+
   return (
     <>
       <div className="backdrop" onClick={onClose}></div>
@@ -170,39 +276,20 @@ export default function MovieCard({
               </div>
               {watchedBox ? (
                 <Feedback
-                  onAddToWatched={handleAddToWatchedList}
+                  onAddToWatched={
+                    isFromWatchedList
+                      ? handleUpdateWatchedMovie
+                      : handleAddToWatchedList
+                  }
                   setUserRating={setUserRating}
                   setComment={setComment}
                   comment={comment}
                   userRating={userRating}
                 />
+              ) : isFromWatchedList ? (
+                renderWatchedListContent()
               ) : (
-                <>
-                  <div className="description">{movieDetails?.Plot}</div>
-                  <div className="elements">
-                    <div className="row">
-                      <span className="type">Country:</span>
-                      <span className="data">{movieDetails?.Country}</span>
-                    </div>
-                    <div className="row">
-                      <span className="type">Genre:</span>
-                      <span className="data">{movieDetails?.Genre}</span>
-                    </div>
-                    <div className="row">
-                      <span className="type">Released:</span>
-                      <span className="data">{movieDetails?.Released}</span>
-                    </div>
-                    <div className="row">
-                      <span className="type">Director:</span>
-                      <span className="data">{movieDetails?.Director}</span>
-                    </div>
-                    <div className="row">
-                      <span className="type">Casts:</span>
-                      <span className="data">{movieDetails?.Actors}</span>
-                    </div>
-                  </div>
-                  <div className="buttons">{renderButtons()}</div>
-                </>
+                renderFullDetails()
               )}
             </div>
           </div>
