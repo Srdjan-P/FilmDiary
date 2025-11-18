@@ -17,7 +17,7 @@ export default function WatchedList({
   localQuery,
   onSelectMovie,
 }) {
-  const [sortBy, setSortBy] = useState("default");
+  const [sortBy, setSortBy] = useState("");
   const filteredData = watched.filter((item) => {
     if (!localQuery || localQuery === "") {
       return item;
@@ -41,9 +41,7 @@ export default function WatchedList({
       return lowRating - highRating;
     }
 
-    if (sortBy === "default") {
-      return filteredData;
-    }
+    return 0;
   });
 
   return (
