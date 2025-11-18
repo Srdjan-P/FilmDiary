@@ -291,12 +291,12 @@ body {
             object-fit: cover;
             animation: popup 0.3s ease;
             position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.199);
 
             .movie-poster {
               width: 100%;
-              height: 14.5rem;
+              height: 16rem;
               overflow: hidden;
+              border: 1px solid rgba(255, 255, 255, 0.199);
 
               img {
                 width: 100%;
@@ -584,7 +584,7 @@ body {
             }
 
             textarea {
-              height: 6rem;
+              height: 5rem;
               max-height: 8rem;
               min-height: 4rem;
               max-width: 100%;
@@ -706,6 +706,61 @@ body {
   }
 }
 
+// MUI Select component styling
+.select {
+  display: flex;
+  width: 100%;
+}
+.MuiFormControl-root {
+  .MuiInputLabel-root {
+    color: #fff !important;
+
+    &.Mui-focused {
+      color: variables.$primaryColor !important;
+    }
+  }
+
+  .MuiOutlinedInput-root {
+    color: #fff !important;
+
+    .MuiOutlinedInput-notchedOutline {
+      border-color: rgba(255, 255, 255, 0.3) !important;
+    }
+
+    &:hover .MuiOutlinedInput-notchedOutline {
+      border-color: variables.$primaryColor !important;
+    }
+
+    &.Mui-focused .MuiOutlinedInput-notchedOutline {
+      border-color: variables.$primaryColor !important;
+    }
+  }
+
+  .MuiSelect-icon {
+    color: #fff !important;
+  }
+}
+
+// Dropdown menu styling
+.MuiPopover-root {
+  .MuiPaper-root {
+    background-color: variables.$primaryDarkestColor !important;
+    color: #fff !important;
+
+    .MuiMenuItem-root {
+      color: #fff !important;
+
+      &:hover {
+        background-color: variables.$primaryDarkerColor !important;
+      }
+
+      &.Mui-selected {
+        background-color: variables.$primaryColor !important;
+      }
+    }
+  }
+}
+
 @keyframes popup {
   0% {
     opacity: 0;
@@ -748,7 +803,7 @@ body {
 
             li {
               .movie-poster {
-                height: 10.5rem;
+                height: 12rem;
               }
 
               .details {
@@ -893,6 +948,8 @@ body {
             padding-bottom: 0;
 
             .your-rating {
+              padding: 0.5rem !important;
+
               p {
                 font-size: 1.2rem;
               }
@@ -907,6 +964,7 @@ body {
           }
 
           .your-comment {
+            padding: 0.5rem !important;
             p {
               font-size: 1.2rem !important;
             }
@@ -917,6 +975,7 @@ body {
             }
 
             textarea {
+              height: 4rem !important;
               &::placeholder {
                 font-size: 1rem;
               }
